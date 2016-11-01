@@ -8,4 +8,5 @@
   <modules>
     <module>webapp</module>
   </modules>
+  <!-- comment -->
 </project>
