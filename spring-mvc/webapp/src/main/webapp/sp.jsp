@@ -8,6 +8,7 @@
 </head>
 <body>
 <p>PARAGRAPH</p>
+<p>PARAGRAPH 2</p>
 </body>
 </html>
 
