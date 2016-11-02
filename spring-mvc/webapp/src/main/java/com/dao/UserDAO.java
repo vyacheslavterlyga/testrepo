@@ -23,4 +23,9 @@ public class UserDAO {
 	public User getUserById(String id){
 		return (User)sessionFactory.getCurrentSession().createQuery("from com.model.User where id = '" + id + "'").uniqueResult();
 	}
+	
+	@Transactional(readOnly = true)
+	public User getAllUsers(){
+		return (User)sessionFactory.getCurrentSession().createQuery("from com.model.User where id = ?").uniqueResult();
+	}
 }
