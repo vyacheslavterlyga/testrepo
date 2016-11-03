@@ -8,6 +8,6 @@ import com.training.persistence.model.User;
 @Repository
 public interface UserDAO extends EntityDAO<User> {
 
-  @Transactional(readOnly = false)
-  User getByLogin(String Login);
+  @Transactional(readOnly = true)
+  User getByLogin(String login);
 }
