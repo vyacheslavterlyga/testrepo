@@ -11,11 +11,7 @@
 
 	<tx:annotation-driven />
 
-	<context:component-scan base-package="com.training." />
-	<context:component-scan base-package="com.training.persistence.dao.impl" />
-	<context:component-scan base-package="com.training.persistence.model" />
-	<context:component-scan base-package="com.training.ui.controller" />
-
+	<context:component-scan base-package="com.training" />
 
 	<mvc:view-resolvers>
 		<mvc:jsp suffix=".jsp" prefix="/" cache-views="false" />
@@ -26,7 +22,7 @@
 
 
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
@@ -34,16 +30,13 @@
 
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dbDataSource" />
-		<property name="packagesToScan" value="com" />
+		<property name="packagesToScan" value="com.training.persistence" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.max_fetch_depth">3</prop>
-				<prop key="hibernate.jdbc.fetch_size">50</prop>
-				<prop key="hibernate.jdbc.batch_size">10</prop>
-				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
