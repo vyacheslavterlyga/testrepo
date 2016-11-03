@@ -14,8 +14,8 @@ import com.training.persistence.model.User;
 public class UserDAOImpl extends AbstractEntityDAOImpl<com.training.persistence.model.User> implements UserDetailsService, UserDAO {
 
   @Override
-  public User getByLogin(String Login) {
-    return (User) sessionFactory.getCurrentSession().createQuery("FROM User WHERE login = :login").setString("login", Login).uniqueResult();
+  public User getByLogin(String login) {
+    return (User) getSession().createQuery("FROM User WHERE login = :login").setString("login", login).uniqueResult();
   }
 
   @Override
