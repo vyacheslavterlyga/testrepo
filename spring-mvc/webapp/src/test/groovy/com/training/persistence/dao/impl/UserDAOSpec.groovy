@@ -7,6 +7,6 @@ class UserDAOSpec extends AbstractEntityDAOSpec {
 
   @Override
   public EntityDAO getDAO() { 
-    return new UserDAOImpl(sessionFactory:sessionFactory)
+    return new UserDAOImpl(sessionFactory:sessionFactory) 
   }
 }

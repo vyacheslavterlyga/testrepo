@@ -32,6 +32,6 @@ abstract class AbstractEntityDAOSpec extends Specification {
     when:
     def result =dao.getById(_ as String)
     then:
-    1 * sessionFactory.getCurrentSession().get( _ as AbstractEntity,_ as String)
+    1 * sessionFactory.getCurrentSession().get( _ as AbstractEntity,_ as String) 
   }
 }

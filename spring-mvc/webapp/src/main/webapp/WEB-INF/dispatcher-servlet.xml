@@ -27,7 +27,6 @@
 
 	<bean id="UserDAO" class="com.training.persistence.dao.impl.UserDAOImpl"></bean>
 
-
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dbDataSource" />

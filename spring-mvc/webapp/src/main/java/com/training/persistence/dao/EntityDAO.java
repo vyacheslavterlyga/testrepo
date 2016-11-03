@@ -11,5 +11,4 @@ public interface EntityDAO<T extends AbstractEntity> {
   T add(T user);
 
   List<T> getAll();
-
 }
