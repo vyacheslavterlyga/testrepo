@@ -3,13 +3,19 @@ package com.training.persistence.dao;
 import java.util.List;
 
 import com.training.persistence.model.AbstractEntity;
+<<<<<<< HEAD
+
 
 public interface EntityDAO<T extends AbstractEntity> {
 
-	T add(T user);
-
+<<<<<<< HEAD
 	T getById(Long id);
+=======
+  T add(T user);
+>>>>>>> origin/master
 
-	List<T> getAll();
+  T getById(String id);
+
+  List<T> getAll();
 
 }
