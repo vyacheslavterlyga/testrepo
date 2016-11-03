@@ -7,10 +7,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.training.persistence.dao.UserDAO;
 import com.training.persistence.model.User;
 
+@Service
 public class UserDAOImpl extends AbstractEntityDAOImpl<com.training.persistence.model.User> implements UserDetailsService, UserDAO {
 
   @Override
