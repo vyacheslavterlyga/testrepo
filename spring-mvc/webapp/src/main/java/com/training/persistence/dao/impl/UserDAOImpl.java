@@ -1,4 +1,4 @@
-package com.dao;
+package com.training.persistence.dao.impl;
 
 import java.util.List;
 
@@ -8,30 +8,45 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.model.User;
+import com.training.persistence.dao.UserDAO;
+import com.training.persistence.model.User;
 
 @Repository
-public class UserDAO implements UserDetailsService {
+public class UserDAOImpl implements UserDetailsService, UserDAO {
 
-  @Autowired
+  private static final String MODEL_USER = "com.training.persistence.model.User";
+@Autowired
   private SessionFactory sessionFactory;
 
-  @Transactional(readOnly = false)
+  /* (non-Javadoc)
+ * @see com.training.persistence.dao.UserDAO#addUser(com.training.persistence.model.User)
+ */
+@Override
+@Transactional(readOnly = false)
   public User addUser(User user) {
     sessionFactory.getCurrentSession().save(user);
     return user;
   }
 
-  @Transactional(readOnly = true)
+  /* (non-Javadoc)
+ * @see com.training.persistence.dao.UserDAO#getUserById(java.lang.String)
+ */
+@Override
+@Transactional(readOnly = true)
   public User getUserById(String id) {
     return (User) sessionFactory.getCurrentSession().get(User.class, id);
   }
 
-  @Transactional(readOnly = true)
+  /* (non-Javadoc)
+ * @see com.training.persistence.dao.UserDAO#getAllUsers()
+ */
+@Override
+@Transactional(readOnly = true)
   public List<User> getAllUsers() {
-    return sessionFactory.getCurrentSession().createQuery("from com.model.User").list();
+    return sessionFactory.getCurrentSession().createQuery("from "+MODEL_USER).list();
   }
 
   @Override

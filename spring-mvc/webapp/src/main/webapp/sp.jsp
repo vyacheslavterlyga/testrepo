@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>PARAGRAPH</p>
-<p>PARAGRAPH 2</p>
-<p>PARAGRAPH 3</p>
+	<h2>Default start page</h2>
 </body>
 </html>
 
