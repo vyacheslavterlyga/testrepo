@@ -10,7 +10,7 @@ import com.training.persistence.dao.EntityDAO
 import com.training.persistence.model.AbstractEntity
 import com.training.persistence.model.User
 
-abstract class AbstractEntityDAOSpec extends Specification {
+abstract class AbstractEntityDAOSpec extends Specification { 
 
   @Shared
   SessionFactory sessionFactory = Stub(SessionFactory)
