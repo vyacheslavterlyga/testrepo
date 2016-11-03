@@ -21,7 +21,7 @@ public class MainController {
 	@RequestMapping(value = "/index")
 	public ModelAndView startMethod(){
 		logger.debug("open index page");
-		User user = m_UserDao.getUserById("root");
+		User user = m_UserDao.getById("root");
 		return new ModelAndView("index", "User", user);
 	}
 }
