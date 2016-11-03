@@ -9,7 +9,7 @@
 	<context:component-scan base-package="com.training.ui.controller" />
 
 	<mvc:view-resolvers>
-		<mvc:jsp suffix=".jsp" prefix="/" cache-views="false" />
+		<mvc:jsp suffix=".jsp" prefix="/jsp/" cache-views="false" />
 	</mvc:view-resolvers>
 
 </beans>

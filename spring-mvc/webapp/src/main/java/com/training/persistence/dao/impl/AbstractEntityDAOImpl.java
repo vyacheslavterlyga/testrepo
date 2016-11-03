@@ -14,12 +14,12 @@ abstract public class AbstractEntityDAOImpl<T extends AbstractEntity> implements
 
   @Autowired
   private SessionFactory sessionFactory;
-  
-  protected Session getSession(){
-	  return sessionFactory.getCurrentSession();
+
+  protected Session getSession() {
+    return sessionFactory.getCurrentSession();
   }
 
-  @Override 
+  @Override
   public T add(T user) {
     getSession().save(user);
     return user;
@@ -27,7 +27,7 @@ abstract public class AbstractEntityDAOImpl<T extends AbstractEntity> implements
 
   @Override
   public T getById(Long id) {
-    return (T) getSession().get(getGenericClass(), id);
+    return getSession().get(getGenericClass(), id);
   }
 
   private Class<? extends T> getGenericClass() {
