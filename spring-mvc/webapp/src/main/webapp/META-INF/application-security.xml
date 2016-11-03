@@ -17,7 +17,7 @@
 	</http>
 
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="employeeDAO" />
+		<authentication-provider user-service-ref="UserDAO" />
 	</authentication-manager>
 
 </beans:beans>
