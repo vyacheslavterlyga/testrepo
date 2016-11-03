@@ -8,7 +8,6 @@
 </head>
 <body>
 	<h2>Default start page</h2>
-	
 </body>
 </html>
 
