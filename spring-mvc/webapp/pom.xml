@@ -51,7 +51,10 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring-security-core.version}</version>
 		</dependency>
-
 	</dependencies>
+	
+	<build>
+		<finalName>webapp</finalName>
+	</build>
 	
 </project>
