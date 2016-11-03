@@ -2,12 +2,14 @@ package com.training.persistence.dao;
 
 import java.util.List;
 
-public interface EntityDAO<T extends Object> {
+import com.training.persistence.model.AbstractEntity;
 
-	T add(T user);
+public interface EntityDAO<T extends AbstractEntity> {
 
-	T getById(String id);
+  T add(T user);
 
-	List<T> getAll();
+  T getById(String id);
+
+  List<T> getAll();
 
 }
