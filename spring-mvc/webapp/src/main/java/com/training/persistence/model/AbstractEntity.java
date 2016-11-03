@@ -8,7 +8,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class AbstractEntity {
+public abstract class AbstractEntity {
 
   @Id
   @Column(name = "id")
