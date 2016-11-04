@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.training.persistence.dao.UserDAO;
@@ -33,10 +35,18 @@ public class MainController {
 
     return new ModelAndView("sp");
   }
+  
   @RequestMapping(value = "/addUserForm")
   public ModelAndView addUserForm() {
     logger.debug("open add User form page");
 
-    return new ModelAndView("addUserForm", "User", new User());
+    return new ModelAndView("addUserForm", "UserJSP", new User());
+  }
+  
+  @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+  public ModelAndView addUser(@ModelAttribute("UserJSP")User user) {
+    logger.debug("open add User page; start insert User in DB");
+    m_UserDao.add(user);
+    return new ModelAndView("sp");
   }
 }
