@@ -7,7 +7,7 @@
 </head>
 <body>
 	<spring:url value="addUser" var="urlAddUser"></spring:url>
-	<form:form commandName="User" action="addUser">
+	<form:form commandName="User" action="${urlAddUser}">
 		<p>Login:</p>
 		<form:input path="login"/>
 		<p>Password:</p>
