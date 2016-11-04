@@ -7,7 +7,7 @@
 	<h2>Hello World!!!</h2>
 	<p>Id: ${User.id}</p>
 	<p>Login user : ${User.login}</p>
-	<a href="<spring:url value="/addUser"/>">Add User</a>	
+	<a href="<spring:url value="/user/add"/>">Add User</a>	
 	<h2>All users:</h2>
 	<p>$(UserDAO.getAllUsers)</p>
 </body>

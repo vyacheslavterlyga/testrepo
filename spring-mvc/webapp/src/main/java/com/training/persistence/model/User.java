@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,11 +34,13 @@ public class User extends AbstractEntity {
   @Column(name = "start_date")
   @Getter
   @Setter
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date startDate;
 
   @Column(name = "end_date")
   @Getter
   @Setter
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date endDate;
 
   @Getter
