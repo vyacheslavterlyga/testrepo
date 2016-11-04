@@ -12,6 +12,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<tx:annotation-driven />
+	
+	<context:component-scan base-package="com.training.persistence"/>
+	<bean class="com.training.persistence.dao.impl.UserDAOImpl"/>
 
 	<jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/MyLocalDB"
 		expected-type="javax.sql.DataSource" />
@@ -29,9 +32,12 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
 				<prop key="hibernate.ejb.naming_strategy">com.training.persistence.model</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
+	
+	
 
 </beans>

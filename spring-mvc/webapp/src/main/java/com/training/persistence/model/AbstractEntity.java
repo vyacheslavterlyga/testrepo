@@ -1,10 +1,8 @@
 package com.training.persistence.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
@@ -12,8 +10,7 @@ import org.hibernate.annotations.GenerationTime;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class AbstractEntity {
 
   @Id
