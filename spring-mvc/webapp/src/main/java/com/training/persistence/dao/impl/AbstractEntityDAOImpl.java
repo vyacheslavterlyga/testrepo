@@ -20,9 +20,9 @@ abstract public class AbstractEntityDAOImpl<T extends AbstractEntity> implements
   }
 
   @Override
-  public T add(T user) {
-    getSession().save(user);
-    return user;
+  public T add(T entity) {
+    getSession().save(entity);
+    return entity;
   }
 
   @Override

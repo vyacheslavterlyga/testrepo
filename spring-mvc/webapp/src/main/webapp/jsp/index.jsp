@@ -7,7 +7,5 @@
 	<h2>Hello World!!!</h2>
 	<p>Id: ${User.id}</p>
 	<p>Login user : ${User.login}</p>
-	<h2>All users:</h2>
-	<p>$(UserDAO.getAllUsers)</p>
 </body>
 </html>
