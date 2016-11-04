@@ -4,10 +4,10 @@
 	isELIgnored="false"%>
 <html>
 <body>
-	<h2>Hello World!!!</h2>
-	<p>Id: ${User.id}</p>
-	<%--<p>Name: ${User.name}</p>--%>
-	<h2>All users:</h2>
-	<%--<p>$(UserDAO.getAllUsers)</p>--%>
+	<h2>Hello, ${User.login}!</h2>
+	<p>Your ID in the database: ${User.id}</p>
+	<h1>_________________________________________</h1>
+	<h3>You can see list of all users below:</h3>
+	<p>$(UserDAOImpl.getAllUsers)</p>
 </body>
 </html>
