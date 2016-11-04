@@ -9,6 +9,9 @@ import javax.persistence.InheritanceType;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractEntity {
@@ -16,14 +19,8 @@ public abstract class AbstractEntity {
   @Id
   @Generated(GenerationTime.NEVER)
   @Column(name = "id")
+  @Getter
+  @Setter
   Long id;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
 }

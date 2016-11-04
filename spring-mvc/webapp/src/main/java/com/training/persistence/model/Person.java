@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
@@ -15,12 +18,18 @@ public class Person extends AbstractEntity {
   long id;
 
   @Column(name = "first_name")
+  @Getter
+  @Setter
   String firstName;
 
   @Column(name = "last_name")
+  @Getter
+  @Setter
   String lastName;
 
   @Column(name = "age")
+  @Getter
+  @Setter
   int age;
 
   @OneToOne(optional = false, cascade = CascadeType.ALL)

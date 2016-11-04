@@ -7,75 +7,36 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-  @OneToOne(optional = false, mappedBy = "userId")
-  @Column(name = "id")
-  long id;
-
+  @OneToOne(optional = false)
   @Column(name = "login")
+  @Getter
+  @Setter
   String login;
 
   @Column(name = "password")
+  @Getter
+  @Setter
   String password;
 
   @Column(name = "role")
+  @Getter
+  @Setter
   String role;
 
   @Column(name = "start_date")
+  @Getter
+  @Setter
   Date startDate;
 
   @Column(name = "end_date")
+  @Getter
+  @Setter
   Date endDate;
-
-  @Override
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getLogin() {
-    return login;
-  }
-
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
-
-  public Date getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
 }
