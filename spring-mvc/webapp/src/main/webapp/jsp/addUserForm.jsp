@@ -6,8 +6,8 @@
 <title>Add User</title>
 </head>
 <body>
-	<spring:url value="addUser" var="urlAddUser"></spring:url>
-	<form:form commandName="User" action="${urlAddUser}">
+	<spring:url value="/saveUser" var="saveUserUrl"/>
+	<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
 		<p>Login:</p>
 		<form:input path="login"/>
 		<p>Password:</p>
