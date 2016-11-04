@@ -14,9 +14,6 @@ import lombok.Setter;
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
 
-  @Column(name = "person_id")
-  long id;
-
   @Column(name = "first_name")
   @Getter
   @Setter
@@ -33,7 +30,6 @@ public class Person extends AbstractEntity {
   int age;
 
   @OneToOne(optional = false, cascade = CascadeType.ALL)
-  @JoinColumn(name = "id")
-  @Column(name = "user_id")
-  long userId;
+  @JoinColumn(name = "user_id" )
+  User user;
 }

@@ -14,7 +14,6 @@ import lombok.Setter;
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-  @OneToOne(optional = false)
   @Column(name = "login")
   @Getter
   @Setter
@@ -39,4 +38,7 @@ public class User extends AbstractEntity {
   @Getter
   @Setter
   Date endDate;
+  
+  @OneToOne(optional = false, mappedBy = "user")
+  Person person;
 }
