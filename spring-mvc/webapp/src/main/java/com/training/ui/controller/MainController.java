@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,18 +33,10 @@ public class MainController {
 
     return new ModelAndView("sp");
   }
-  
   @RequestMapping(value = "/addUserForm")
   public ModelAndView addUserForm() {
     logger.debug("open add User form page");
 
     return new ModelAndView("addUserForm", "User", new User());
-  }
-  
-  @RequestMapping(value = "/addUser")
-  public ModelAndView addUser(@RequestAttribute("User")User user) {
-    logger.debug("open add User page; start insert User in DB");
-    m_UserDao.add(user);
-    return new ModelAndView("sp");
   }
 }
