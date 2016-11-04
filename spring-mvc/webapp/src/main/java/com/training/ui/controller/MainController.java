@@ -3,6 +3,8 @@ package com.training.ui.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +23,14 @@ public class MainController {
   @RequestMapping(value = "/index")
   public ModelAndView startMethod() {
     logger.debug("open index page");
-    User user = m_UserDao.getByLogin("root");
-    return new ModelAndView("index", "User", user);
+
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if (principal != null && UserDetails.class.isAssignableFrom(principal.getClass())) {
+      UserDetails securityUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User user = m_UserDao.getByLogin(securityUser.getUsername());
+      return new ModelAndView("index", "User", user);
+    }
+
+    return new ModelAndView("sp");
   }
 }

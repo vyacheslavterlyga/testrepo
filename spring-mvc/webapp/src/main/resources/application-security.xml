@@ -10,11 +10,11 @@
 	
 	<context:component-scan base-package="com.training.security.service" />
 							
-	<http auto-config="true" use-expressions="true">
+	<http auto-config="true" >
 		<intercept-url pattern="/login" access="permitAll"/>
 		<intercept-url pattern="/logout" access="permitAll"/>
 		<intercept-url pattern="/accessdenied" access="permitAll"/>
-		<intercept-url pattern="/**" access="hasRole('USER')"/>
+		<intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')"/>
 		<form-login default-target-url="/index" />
 		<logout logout-success-url="/logout" />
 	</http>
