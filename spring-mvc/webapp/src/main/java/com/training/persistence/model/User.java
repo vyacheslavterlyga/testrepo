@@ -8,47 +8,36 @@ import javax.persistence.Table;
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-	@Column(name = "login")
-	String m_Login;
+  @Column(name = "login")
+  String login;
 
-	@Column(name = "password")
-	String m_Password;
+  @Column(name = "password")
+  String password;
 
-	@Column(name = "name")
-	String m_Name;
+  @Column(name = "role")
+  String role;
 
-	@Column(name = "role")
-	String m_Role;
+  public String getLogin() {
+    return login;
+  }
 
-	public String getLogin() {
-		return m_Login;
-	}
+  public void setLogin(String login) {
+    this.login = login;
+  }
 
-	public void setLogin(String login) {
-		m_Login = login;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public String getPassword() {
-		return m_Password;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public void setPassword(String password) {
-		m_Password = password;
-	}
+  public String getRole() {
+    return role;
+  }
 
-	public String getName() {
-		return m_Name;
-	}
-
-	public void setName(String name) {
-		m_Name = name;
-	}
-
-	public String getRole() {
-		return m_Role;
-	}
-
-	public void setRole(String role) {
-		m_Role = role;
-	}
+  public void setRole(String role) {
+    this.role = role;
+  }
 }
