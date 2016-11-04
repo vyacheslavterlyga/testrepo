@@ -1,5 +1,7 @@
 package com.training.persistence.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,4 +27,15 @@ public class User extends AbstractEntity {
   @Getter
   @Setter
   String role;
+
+  @Column(name = "start_date")
+  @Getter
+  @Setter
+  Date startDate;
+
+  @Column(name = "end_date")
+  @Getter
+  @Setter
+  Date endDate;
+
 }

@@ -33,4 +33,10 @@ public class MainController {
 
     return new ModelAndView("sp");
   }
+  @RequestMapping(value = "/addUserForm")
+  public ModelAndView addUserForm() {
+    logger.debug("open add User form page");
+
+    return new ModelAndView("addUserForm", "User", new User());
+  }
 }
