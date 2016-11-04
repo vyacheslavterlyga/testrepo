@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -38,7 +37,4 @@ public class User extends AbstractEntity {
   @Getter
   @Setter
   Date endDate;
-  
-  @OneToOne(optional = false, mappedBy = "user")
-  Person person;
 }

@@ -13,7 +13,6 @@ public class UserDAOImpl extends AbstractEntityDAOImpl<User> implements UserDAO 
   }
 
   public List<User> getAllUsers() {
-    List<User> userList = (List<User>) getSession().createQuery("FROM User");
-    return userList;
+    return getSession().createQuery("FROM User").list();
   }
 }
