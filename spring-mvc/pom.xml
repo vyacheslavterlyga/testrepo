@@ -20,10 +20,11 @@
 		<servlet-api.version>3.1.0</servlet-api.version>
 		<groovy-all.version>2.4.3</groovy-all.version>
 		<spock-core.version>1.1-groovy-2.4-rc-2</spock-core.version>
+		<lombok.version>1.16.10</lombok.version>
 	</properties>
 
 	<dependencies>
-		<!-- Logging --> 
+		<!-- Logging -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -41,9 +42,10 @@
 			<version>${spock-core.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>3.2.4</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

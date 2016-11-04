@@ -4,40 +4,25 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
   @Column(name = "login")
+  @Getter
+  @Setter
   String login;
 
   @Column(name = "password")
+  @Getter
+  @Setter
   String password;
 
   @Column(name = "role")
+  @Getter
+  @Setter
   String role;
-
-  public String getLogin() {
-    return login;
-  }
-
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
 }
