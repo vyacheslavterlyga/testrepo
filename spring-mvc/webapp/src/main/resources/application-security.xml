@@ -19,8 +19,6 @@
 		<logout logout-success-url="/logout" />
 	</http>
 	
-	<beans:bean name="userDao" class="com.training.persistence.dao.impl.UserDAOImpl"/>
-	
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="userdDetailsService" />
 	</authentication-manager>

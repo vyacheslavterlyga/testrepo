@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,26 +17,31 @@ public class User extends AbstractEntity {
   @Column(name = "login")
   @Getter
   @Setter
-  String login;
+  private String login;
 
   @Column(name = "password")
   @Getter
   @Setter
-  String password;
+  private String password;
 
   @Column(name = "role")
   @Getter
   @Setter
-  String role;
+  private String role;
 
   @Column(name = "start_date")
   @Getter
   @Setter
-  Date startDate;
+  private Date startDate;
 
   @Column(name = "end_date")
   @Getter
   @Setter
-  Date endDate;
+  private Date endDate;
+
+  @Getter
+  @Setter
+  @OneToOne(mappedBy = "user")
+  private Person person;
 
 }
