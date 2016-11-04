@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import com.training.persistence.model.User;
 public class UserdDetailsService implements UserDetailsService {
 
   @Autowired
+  @Qualifier("userDao")
   UserDAO userDAO;
 
   @Override
