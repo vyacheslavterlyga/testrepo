@@ -11,7 +11,10 @@ import javax.persistence.Table;
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-  @OneToOne(optional = false)
+  @OneToOne(optional = false, mappedBy = "userId")
+  @Column(name = "id")
+  long id;
+
   @Column(name = "login")
   String login;
 
@@ -20,12 +23,21 @@ public class User extends AbstractEntity {
 
   @Column(name = "role")
   String role;
-  
+
   @Column(name = "start_date")
   Date startDate;
-  
+
   @Column(name = "end_date")
   Date endDate;
+
+  @Override
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public String getLogin() {
     return login;
@@ -51,19 +63,19 @@ public class User extends AbstractEntity {
     this.role = role;
   }
 
-public Date getStartDate() {
-	return startDate;
-}
+  public Date getStartDate() {
+    return startDate;
+  }
 
-public void setStartDate(Date startDate) {
-	this.startDate = startDate;
-}
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
 
-public Date getEndDate() {
-	return endDate;
-}
+  public Date getEndDate() {
+    return endDate;
+  }
 
-public void setEndDate(Date endDate) {
-	this.endDate = endDate;
-}
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
 }

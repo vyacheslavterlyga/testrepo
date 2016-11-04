@@ -11,10 +11,8 @@ import javax.persistence.Table;
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
 
-  @OneToOne(optional = false, cascade = CascadeType.ALL)
-  @JoinColumn(name = "login")
   @Column(name = "person_id")
-  int id;
+  long id;
 
   @Column(name = "first_name")
   String firstName;
@@ -24,4 +22,9 @@ public class Person extends AbstractEntity {
 
   @Column(name = "age")
   int age;
+
+  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  @JoinColumn(name = "id")
+  @Column(name = "user_id")
+  long userId;
 }
