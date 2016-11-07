@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>Default start page</h2>
-	<a href="<spring:url value="/user/list"/>">User info page</a>
+	<a href="<spring:url value="/user/index"/>">User info page</a>
 </body>
 </html>
 
