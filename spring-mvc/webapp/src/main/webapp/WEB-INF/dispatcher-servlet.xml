@@ -6,10 +6,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="com.training.ui.controller" />
-
+	<context:component-scan base-package="com.training"/>
+	<mvc:annotation-driven />
+	
 	<mvc:view-resolvers>
 		<mvc:jsp suffix=".jsp" prefix="/jsp/" cache-views="false" />
 	</mvc:view-resolvers>
-
+	
 </beans>

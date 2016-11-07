@@ -13,7 +13,7 @@
 
 	<tx:annotation-driven />
 	
-	<context:component-scan base-package="com.training.persistence"/>
+	<context:component-scan base-package="com.training"/>
 	<bean class="com.training.persistence.dao.impl.UserDAOImpl"/>
 
 	<jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/MyLocalDB"

@@ -16,48 +16,36 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @SequenceGenerator(name = "userSeqGen", sequenceName = "AUSER_SEQUENCE")
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
-	@Column(name = "id")
-	@Getter
-	@Setter
-	Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
+  @Column(name = "id")
+  Long id;
 
-	@Column(name = "login")
-	@Getter
-	@Setter
-	private String login;
+  @Column(name = "login")
+  private String login;
 
-	@Column(name = "password")
-	@Getter
-	@Setter
-	private String password;
+  @Column(name = "password")
+  private String password;
 
-	@Column(name = "role")
-	@Getter
-	@Setter
-	private String role;
+  @Column(name = "role")
+  private String role;
 
-	@Column(name = "start_date")
-	@Getter
-	@Setter
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date startDate;
+  @Column(name = "start_date")
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
+  private Date startDate;
 
-	@Column(name = "end_date")
-	@Getter
-	@Setter
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date endDate;
+  @Column(name = "end_date")
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
+  private Date endDate;
 
-	@Getter
-	@Setter
-	@OneToOne(mappedBy = "user")
-	private Person person;
+  @OneToOne(mappedBy = "user")
+  private Person person;
 
 }

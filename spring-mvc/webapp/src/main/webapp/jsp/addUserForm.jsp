@@ -15,9 +15,9 @@
 		<p>Role:</p>
 		<form:input path="role" />
 		<p>Start date:</p>
-		<%-- <form:input path="startDate" /> --%>
+		<form:input path="startDate" />
 		<p>End date:</p>
-		<%-- <form:input path="endDate" /> --%>
+		<form:input path="endDate" />
 		<br />
 		<form:button>Add</form:button>
 	</form:form>
