@@ -15,46 +15,35 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @SequenceGenerator(name = "personSeqGen", sequenceName = "PERSON_SEQUENCE")
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeqGen")
-	@Column(name = "id")
-	@Getter
-	@Setter
-	Long id;
 
-	@Column(name = "first_name")
-	@Getter
-	@Setter
-	private String firstName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeqGen")
+  @Column(name = "id")
+  Long id;
 
-	@Column(name = "last_name")
-	@Getter
-	@Setter
-	private String lastName;
+  @Column(name = "first_name")
+  private String firstName;
 
-	@Column(name = "age")
-	@Getter
-	@Setter
-	private Integer age;
+  @Column(name = "last_name")
+  private String lastName;
 
-	@Column(name = "start_date")
-	@Getter
-	@Setter
-	private Date startDate;
+  @Column(name = "age")
+  private Integer age;
 
-	@Column(name = "end_date")
-	@Getter
-	@Setter
-	private Date endDate;
+  @Column(name = "start_date")
+  private Date startDate;
 
-	@Getter
-	@Setter
-	@OneToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+  @Column(name = "end_date")
+  private Date endDate;
+
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
 }
