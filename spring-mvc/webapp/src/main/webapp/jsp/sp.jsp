@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>Redirect</title>
 	<link rel='stylesheet' href='<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"/>'>
 </head>
 <body>

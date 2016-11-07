@@ -13,7 +13,11 @@
 <body>
 	<table border="2">
 		<tr>
-		<td> Login </td> <td> Password </td> <td> Role </td> <td> Start date</td> <td> End date </td>
+			<td>Login</td>
+			<td>Password</td>
+			<td>Role</td>
+			<td>Start date</td>
+			<td>End date</td>
 		</tr>
 		<c:forEach var="listValue" items="${lists}">
 			<tr>
@@ -26,5 +30,8 @@
 		</c:forEach>
 	</table>
 
+	<p>
+		<a href="<spring:url value="/user/index"/>">Back</a>
+	</p>
 </body>
 </html>
