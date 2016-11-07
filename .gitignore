@@ -1,2 +1,7 @@
 *.classpath
 *.project
+.metadata/
+.recommenders/
+Servers/
+spring-mvc/webapp/src/main/java/com/training/persistence/dao/impl/PersonDAOImpl.java
+spring-mvc/webapp/src/main/java/com/training/persistence/dao/PersonDAO.java

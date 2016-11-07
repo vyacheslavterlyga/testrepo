@@ -1,5 +1,7 @@
 package com.training.ui.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +24,7 @@ public class UserController {
   @Autowired
   UserDAO userDao;
 
-  @RequestMapping(value = "/list")
+  @RequestMapping(value = "/index", method = RequestMethod.GET)
   public ModelAndView list() {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     log.debug("open index page for user '{}'", userDetails.getUsername());
@@ -42,5 +44,16 @@ public class UserController {
     userDao.add(user);
     log.debug("User saved id:'{}'", user.getId());
     return list();
+  }
+
+  @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
+  public ModelAndView getData() {
+
+    List<User> userList = userDao.getAll();
+
+    ModelAndView model = new ModelAndView("allUsersList");
+    model.addObject("lists", userList);
+
+    return model;
   }
 }

@@ -21,6 +21,6 @@
 		<br />
 		<form:button>Add</form:button>
 	</form:form>
-	<a href="<spring:url value="/user/list"/>">Back</a>
+	<a href="<spring:url value="/user/index"/>">Back</a>
 </body>
 </html>
