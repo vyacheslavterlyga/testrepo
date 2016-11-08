@@ -24,7 +24,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "userSeqGen", sequenceName = "AUSER_SEQUENCE")
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
-	public enum ROLE{ADMIN, USER, GUEST}
+	public static enum ROLE{ADMIN, USER, GUEST}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
