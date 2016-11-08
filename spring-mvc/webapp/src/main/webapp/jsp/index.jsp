@@ -1,14 +1,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
+<%@ page contentType="text/html; charset=UTF-8" language="java"
 	isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome, ${User.login}!</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="<spring:url value="/webjars/jquery/1.12.0/jquery.js" />"></script>
+
 <script>
 	$(document).ready(function() {
 		$(".toggleButton").hide();
@@ -27,23 +28,20 @@
 <body>
 
 	<h2>Hello, ${User.login}!</h2>
-
-	<c:set var="role" value="${User.role}" />
-
+	
+	<button class="buttonClass1">Show/hide personal info</button>
 	<p class="toggleButton">Your ID in our database: ${User.id}</p>
 	<p class="toggleButton">Your login is "${User.login}"</p>
 	<p class="toggleButton">Your password is "${User.password}"</p>
 	<p class="toggleButton">Your start date is "${User.startDate}"</p>
 	<p class="toggleButton">Your end date is "${User.endDate}"</p>
-	<button class="buttonClass1">Show/hide personal info</button>
-
 
 	<p>Push the button to request your rights:</p>
-	<button class="buttonClass2" onclick="myFunction()">Request</button>
+	<button class="buttonClass2" onclick="showUserRights()">Request</button>
 	<p id="roleSwither"></p>
 
 	<script>
-		function myFunction() {
+		function showUserRights() {
 			var role = "${User.role}";
 
 			var greeting;
