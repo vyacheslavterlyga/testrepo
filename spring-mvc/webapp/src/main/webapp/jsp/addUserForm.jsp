@@ -11,23 +11,23 @@
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <script>
-$(document).ready($(function() {
+	$(document).ready(function() {
 		$("#datepicker_start").datepicker({
 			dateFormat : "<spring:message code='datePattern'/>"
 		});
 	});
-$(document).ready($(function() {
+	$(document).ready(function() {
 		$("#datepicker_end").datepicker({
 			dateFormat : "<spring:message code='datePattern'/>"
 		});
 	});
-	
-$(document).ready(function() {
-	$("#submitButton").click(function() {
-		var status = "New user added succesfully";
-		document.getElementById("submitStatus").innerHTML = status;
+
+	$(document).ready(function() {
+		$("#submitButton").click(function() {
+			var status = "New user added succesfully";
+			document.getElementById("submitStatus").innerHTML = status;
+		});
 	});
-});
 </script>
 </head>
 <body>
@@ -65,8 +65,8 @@ $(document).ready(function() {
 				<td><br /></td>
 			</tr>
 			<tr>
-				<td><form:button id="submitButton">Add this user</form:button></td>
-				<p id="submitStatus"></p>
+				<td><form:button id="submitButton">Add this user</form:button>
+					<p id="submitStatus"></p></td>
 			</tr>
 		</form:form>
 
