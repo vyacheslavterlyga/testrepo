@@ -41,6 +41,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/index</welcome-file>
+		<welcome-file>/user/index</welcome-file>
 	</welcome-file-list>
 </web-app>
