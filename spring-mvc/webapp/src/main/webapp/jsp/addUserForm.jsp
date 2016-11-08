@@ -11,23 +11,32 @@
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <script>
-	$(function() {
+$(document).ready($(function() {
 		$("#datepicker_start").datepicker({
 			dateFormat : "<spring:message code='datePattern'/>"
 		});
 	});
-	$(function() {
+$(document).ready($(function() {
 		$("#datepicker_end").datepicker({
 			dateFormat : "<spring:message code='datePattern'/>"
 		});
 	});
+	
+$(document).ready(function() {
+	$("#submitButton").click(function() {
+		var status = "New user added succesfully";
+		document.getElementById("submitStatus").innerHTML = status;
+	});
+});
 </script>
 </head>
 <body>
 	Language:
 	<spring:message code='language' />
-	<p align="right"> <a href="?language=en">English</a>|<a href="?language=ru">Русский</a></p>
-	<br /> 
+	<p align="right">
+		<a href="?language=en">English</a>|<a href="?language=ru">Русский</a>
+	</p>
+	<br />
 	<table>
 		<spring:url value="/user/save" var="saveUserUrl" />
 		<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
@@ -52,11 +61,15 @@
 				<td><spring:message code='label.endDate' /></td>
 				<td><form:input type="text" id="datepicker_end" path="endDate" /></td>
 			</tr>
-			<tr><td><br /></td></tr>
 			<tr>
-				<td><form:button>Add</form:button></td>
+				<td><br /></td>
+			</tr>
+			<tr>
+				<td><form:button id="submitButton">Add this user</form:button></td>
+				<p id="submitStatus"></p>
 			</tr>
 		</form:form>
+
 	</table>
 	<br />
 	<br />
