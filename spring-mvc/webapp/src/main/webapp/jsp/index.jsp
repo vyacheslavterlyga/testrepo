@@ -13,18 +13,30 @@
 <script>
 	$(document).ready(function() {
 		$(".toggleButton").hide();
-		$(".buttonClass1").click(function() {
+		$("#personalInfo").click(function() {
 			$(".toggleButton").toggle();
 		});
 	});
-
-	$(document).ready(function() {
-		$(".buttonClass2").click(function() {
-		});
-	});
-	$(document).ready(function() {
-		$("#addLink").hide();
-	});
+	$(document)
+			.ready(
+					function() {
+						$("#addLink").hide();
+						$("#personalInfoRole")
+								.click(
+										function() {
+											var role = "${User.role}";
+											var greeting;
+											if (role == "ADMIN") {
+												greeting = "Congrats, you're admin!) You can change the values in database";
+												$("#addLink").show();
+											} else if (role == "USER") {
+												greeting = "You're not admin! We're sorry(";
+											} else {
+												greeting = "You're just a guest now! Please log in the system";
+											}
+											$("#roleSwither").text(greeting);
+										});
+					});
 </script>
 </head>
 
@@ -32,7 +44,7 @@
 
 	<h2>Hello, ${User.login}!</h2>
 
-	<button class="buttonClass1">Show/hide personal info</button>
+	<button id="personalInfo">Show/hide personal info</button>
 	<p class="toggleButton">Your ID in our database: ${User.id}</p>
 	<p class="toggleButton">Your login is "${User.login}"</p>
 	<p class="toggleButton">Your password is "${User.password}"</p>
@@ -40,25 +52,8 @@
 	<p class="toggleButton">Your end date is "${User.endDate}"</p>
 
 	<p>Push the button to request your rights:</p>
-	<button class="buttonClass2" onclick="showUserRights()">Request</button>
+	<button id="personalInfoRole"">Request</button>
 	<p id="roleSwither"></p>
-
-	<script>
-		function showUserRights() {
-			var role = "${User.role}";
-			var greeting;
-			var link;
-			if (role == "ADMIN") {
-				greeting = "Congrats, you're admin!) You can change the values in database";
-				$("#addLink").show();
-			} else if (role == "USER") {
-				greeting = "You're not admin! We're sorry(";
-			} else {
-				greeting = "You're just a guest now! Please log in the system";
-			}
-			document.getElementById("roleSwither").innerHTML = greeting;
-		}
-	</script>
 
 	<h2>
 		<a id="addLink" href="<spring:url value="/user/add"/>">Add new
