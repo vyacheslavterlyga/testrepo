@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	isELIgnored="false"%>
 <html>
@@ -11,6 +12,7 @@
 
 </head>
 <body>
+
 	<table border="2">
 		<tr>
 			<td>Login</td>
@@ -24,8 +26,9 @@
 				<td>${listValue.login}</td>
 				<td>${listValue.password}</td>
 				<td>${listValue.role}</td>
-				<td>${listValue.startDate}</td>
-				<td>${listValue.endDate}</td>
+				<spring:message code='datePattern' var="datePattern"/>
+				<td><fmt:formatDate value="${listValue.startDate}" pattern="${datePattern}" /></td>
+				<td><fmt:formatDate value="${listValue.endDate}" pattern="${datePattern}" /></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping(value = "/user")
 @Slf4j
-public class UserController {
+public class UserController extends AbstractController {
 
   @Autowired
   UserDAO userDao;
-
+  
   @RequestMapping(value = "/index", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView homePage() {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     log.debug("open index page for user '{}'", userDetails.getUsername());
     User user = userDao.getByLogin(userDetails.getUsername());
@@ -43,11 +43,11 @@ public class UserController {
     log.debug("open add User page; start insert User in DB");
     userDao.add(user);
     log.debug("User saved id:'{}'", user.getId());
-    return list();
+    return allUserView();
   }
 
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
-  public ModelAndView getData() {
+  public ModelAndView allUserView() {
 
     List<User> userList = userDao.getAll();
 
