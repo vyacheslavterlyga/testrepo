@@ -1,2 +1,2 @@
 # testrepo
-Trainig project
+Training project
