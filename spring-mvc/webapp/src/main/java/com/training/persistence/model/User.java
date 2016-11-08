@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,30 +24,32 @@ import lombok.Setter;
 @SequenceGenerator(name = "userSeqGen", sequenceName = "AUSER_SEQUENCE")
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
+	public enum ROLE{ADMIN, USER, GUEST}
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
+	@Column(name = "id")
+	Long id;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
-  @Column(name = "id")
-  Long id;
+	@Column(name = "login")
+	private String login;
 
-  @Column(name = "login")
-  private String login;
+	@Column(name = "password")
+	private String password;
 
-  @Column(name = "password")
-  private String password;
+	@Column(name = "role")
+	@Enumerated(value = EnumType.STRING)
+	private ROLE role;
 
-  @Column(name = "role")
-  private String role;
+	@Column(name = "start_date")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date startDate;
 
-  @Column(name = "start_date")
-  @DateTimeFormat(pattern = "dd/MM/yyyy")
-  private Date startDate;
+	@Column(name = "end_date")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date endDate;
 
-  @Column(name = "end_date")
-  @DateTimeFormat(pattern = "dd/MM/yyyy")
-  private Date endDate;
-
-  @OneToOne(mappedBy = "user")
-  private Person person;
+	@OneToOne(mappedBy = "user")
+	private Person person;
 
 }
