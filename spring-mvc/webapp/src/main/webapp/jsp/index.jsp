@@ -22,13 +22,16 @@
 		$(".buttonClass2").click(function() {
 		});
 	});
+	$(document).ready(function() {
+		$("#addLink").hide();
+	});
 </script>
 </head>
 
 <body>
 
 	<h2>Hello, ${User.login}!</h2>
-	
+
 	<button class="buttonClass1">Show/hide personal info</button>
 	<p class="toggleButton">Your ID in our database: ${User.id}</p>
 	<p class="toggleButton">Your login is "${User.login}"</p>
@@ -43,10 +46,11 @@
 	<script>
 		function showUserRights() {
 			var role = "${User.role}";
-
 			var greeting;
+			var link;
 			if (role == "ADMIN") {
 				greeting = "Congrats, you're admin!) You can change the values in database";
+				$("#addLink").show();
 			} else if (role == "USER") {
 				greeting = "You're not admin! We're sorry(";
 			} else {
@@ -57,10 +61,12 @@
 	</script>
 
 	<h2>
-		<a href="<spring:url value="/user/add"/>">Add new user</a>
+		<a id="addLink" href="<spring:url value="/user/add"/>">Add new
+			user</a>
 	</h2>
 
 	<h2>
+
 		<a href="<spring:url value="/user/allUsersList"/>">View all users</a>
 	</h2>
 
