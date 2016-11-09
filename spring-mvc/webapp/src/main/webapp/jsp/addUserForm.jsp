@@ -10,6 +10,8 @@
 	src="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.js" />"></script>
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
+<link rel="stylesheet"
+	href="<spring:url value="/css/languageList.css"/>">
 <script>
 	$(document).ready(function() {
 		dateFormatLocation = "<spring:message code='datePatternJQuery'/>";
@@ -29,9 +31,7 @@
 <body>
 	Language:
 	<spring:message code='language' />
-	<p align="right">
-		<a href="?language=en">English</a>|<a href="?language=ru">Русский</a>
-	</p>
+	<jsp:include page="languageList.jsp"></jsp:include>
 	<br />
 	<table>
 		<spring:url value="/user/saveNewUser" var="saveUserUrl" />
@@ -50,7 +50,7 @@
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>
-				<td><form:input type="text"	path="startDate" /></td>
+				<td><form:input type="text" path="startDate" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.endDate' /></td>
