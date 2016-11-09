@@ -9,7 +9,6 @@
 <title>Welcome, ${User.login}!</title>
 
 <script src="<spring:url value="/webjars/jquery/1.12.0/jquery.js" />"></script>
-
 <script>
 	$(document)
 			.ready(
@@ -39,7 +38,7 @@
 </head>
 
 <body>
-
+	<jsp:include page="languageList.jsp" />
 	<h2>Hello, ${User.login}!</h2>
 
 	<button id="personalInfo">Show/hide personal info</button>

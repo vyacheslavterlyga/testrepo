@@ -25,7 +25,9 @@
   }
   pageContext.setAttribute("availableLocales", availableLocales);
 %>
-<div align="right">
+<link rel="stylesheet"
+	href="<spring:url value="/css/languageList.css"/>">
+<div id="languageList">
 	<spring:message code="language.title" /> : <select
 		onchange="if (this.value) window.location.href=this.value">
 		<c:forEach items="${availableLocales.keySet()}" var="localeKey">

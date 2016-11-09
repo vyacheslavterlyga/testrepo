@@ -29,8 +29,6 @@
 </script>
 </head>
 <body>
-	Language:
-	<spring:message code='language' />
 	<jsp:include page="languageList.jsp" />
 	<br />
 	<table>

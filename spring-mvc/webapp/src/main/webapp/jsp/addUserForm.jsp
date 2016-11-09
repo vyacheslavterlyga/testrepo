@@ -10,9 +10,6 @@
 	src="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.js" />"></script>
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
-<link rel="stylesheet"
-	href="<spring:url value="/css/languageList.css"/>">
-
 <script>
 	var stDate;
 	var enDate;
