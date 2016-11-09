@@ -12,17 +12,13 @@
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <script>
 	$(document).ready(function() {
-		$("#datepicker_start").datepicker({
-			dateFormat : "<spring:message code='datePattern'/>"
+		dateFormatLocation = "<spring:message code='datePatternJQuery'/>";
+		$("#startDate").datepicker({
+			dateFormat : dateFormatLocation
 		});
-	});
-	$(document).ready(function() {
-		$("#datepicker_end").datepicker({
-			dateFormat : "<spring:message code='datePattern'/>"
+		$("#endDate").datepicker({
+			dateFormat : dateFormatLocation
 		});
-	});
-
-	$(document).ready(function() {
 		$("#submitButton").click(function() {
 			var status = "New user added succesfully";
 			document.getElementById("submitStatus").innerHTML = status;
@@ -38,7 +34,7 @@
 	</p>
 	<br />
 	<table>
-		<spring:url value="/user/save" var="saveUserUrl" />
+		<spring:url value="/user/saveNewUser" var="saveUserUrl" />
 		<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
 			<tr>
 				<td><spring:message code='label.login' /></td>
@@ -54,12 +50,11 @@
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>
-				<td><form:input type="text" id="datepicker_start"
-						path="startDate" /></td>
+				<td><form:input type="text"	path="startDate" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.endDate' /></td>
-				<td><form:input type="text" id="datepicker_end" path="endDate" /></td>
+				<td><form:input type="text" path="endDate" /></td>
 			</tr>
 			<tr>
 				<td><br /></td>

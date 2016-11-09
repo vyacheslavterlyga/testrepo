@@ -52,7 +52,7 @@
 	<p class="toggleButton">Your end date is "${User.endDate}"</p>
 
 	<p>Push the button to request your rights:</p>
-	<button id="personalInfoRole"">Request</button>
+	<button id="personalInfoRole">Request</button>
 	<p id="roleSwither"></p>
 
 	<h2>
@@ -61,8 +61,13 @@
 	</h2>
 
 	<h2>
-
 		<a href="<spring:url value="/user/allUsersList"/>">View all users</a>
+	</h2>
+	<h2>
+		<spring:url value="/user/update" var="urlUpdate">
+			<spring:param name="userId" value="${User.id}"/>
+		</spring:url>
+		<a href="${urlUpdate}">Update your information</a>
 	</h2>
 
 </body>

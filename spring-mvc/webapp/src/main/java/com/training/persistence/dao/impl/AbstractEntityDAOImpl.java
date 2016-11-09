@@ -20,15 +20,21 @@ abstract public class AbstractEntityDAOImpl<T extends AbstractEntity> implements
   }
 
   @Override
-  public T add(T user) {
-    getSession().save(user);
-    return user;
+  public T add(T entity) {
+    getSession().save(entity);
+    return entity;
   }
 
   @Override
   public T getById(Long id) {
     return getSession().get(getGenericClass(), id);
   }
+  
+  @Override
+	public T update(T entity) {
+		getSession().update(entity);
+		return entity;
+	}
 
   private Class<? extends T> getGenericClass() {
     return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];

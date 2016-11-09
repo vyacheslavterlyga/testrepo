@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.training.persistence.dao.UserDAO;
@@ -38,14 +39,28 @@ public class UserController extends AbstractController {
     return new ModelAndView("addUserForm", "User", new User());
   }
 
-  @RequestMapping(value = "/save", method = RequestMethod.POST)
-  public ModelAndView saveUser(@ModelAttribute("User") User user) {
+  @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
+  public ModelAndView saveNewUser(@ModelAttribute("User") User user) {
     log.debug("open add User page; start insert User in DB");
     userDao.add(user);
     log.debug("User saved id:'{}'", user.getId());
     return allUserView();
   }
-
+  
+  @RequestMapping(value = "/update", method = RequestMethod.GET)
+  public ModelAndView updateUserForm(@RequestParam("userId") Long id){
+	  User user = userDao.getById(id);
+	  return new ModelAndView("updateUserForm", "User", user);
+  }
+  
+  @RequestMapping(value = "/saveUpdateUser", method = RequestMethod.POST)
+  public ModelAndView saveUpdateUser(@ModelAttribute("User") User user) {
+    log.debug("start update User in DB");
+    userDao.update(user);
+    log.debug("User updated id:'{}'", user.getId());
+    return allUserView();
+  }
+  
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
   public ModelAndView allUserView() {
 
