@@ -1,19 +1,18 @@
 package com.training.ui.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
-public class WelcomeController {
+import lombok.extern.slf4j.Slf4j;
 
-  private static final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+@Controller
+@Slf4j
+public class WelcomeController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String welcome() {
-    logger.debug("open welcom page");
+    log.debug("open welcom page");
     return "sp";
   }
 }

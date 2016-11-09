@@ -11,18 +11,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 public class AbstractController {
 
-	@Autowired
-	private MessageSource messageSource;
+  private static final String DATE_PATTERN = "datePattern";
 
-	public AbstractController() {
-		super();
-	}
+  @Autowired
+  private MessageSource messageSource;
 
-	@InitBinder
-	protected void initBinder(ServletRequestDataBinder binder) throws Exception {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat(messageSource.getMessage("datePattern",null, null));
-	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	    binder.registerCustomEditor(Date.class, editor);
-	  }
+  @InitBinder
+  protected void initBinder(ServletRequestDataBinder binder) throws Exception {
+    SimpleDateFormat dateFormat = new SimpleDateFormat(messageSource.getMessage(DATE_PATTERN, null, null));
+    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+    binder.registerCustomEditor(Date.class, editor);
+  }
 
 }
