@@ -12,20 +12,46 @@
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <link rel="stylesheet"
 	href="<spring:url value="/css/languageList.css"/>">
+
 <script>
+	var stDate;
+	var enDate;
+
 	$(document).ready(function() {
 		dateFormatLocation = "<spring:message code='datePatternJQuery'/>";
-		$("#startDate").datepicker({
-			dateFormat : dateFormatLocation
+
+		$("#startDate").datepicker();
+		$("#startDate").change(function() {
+			stDate = $(this).datepicker("getDate");
+			validateDate();
+			$("#startDetails").text(stDate);
+			dateFormat: dateFormatLocation;
 		});
-		$("#endDate").datepicker({
-			dateFormat : dateFormatLocation
-		});
-		$("#submitButton").click(function() {
-			var status = "New user added succesfully";
-			document.getElementById("submitStatus").innerHTML = status;
+
+		$("#endDate").datepicker();
+		$("#endDate").change(function() {
+			enDate = $(this).datepicker("getDate");
+			validateDate();
+			$("#endDetails").text(enDate);
+			dateFormat: dateFormatLocation;
 		});
 	});
+
+	function validateDate() {
+		if (stDate == null) {
+			alert('Start date should be filled!');
+			$("#startDate").focus();
+		} else if (enDate == null) {
+			alert('End date should be filled!');
+			$("#endDate").focus();
+		} else if ((stDate == null) || (enDate == null)) {
+			alert('Date fields should be filled!');
+			$("#startDate").focus();
+		} else if (stDate > enDate) {
+			alert('Start date should be before End date!');
+			$("#startDate").focus();
+		}
+	}
 </script>
 </head>
 <body>
