@@ -11,15 +11,13 @@
 <script src="<spring:url value="/webjars/jquery/1.12.0/jquery.js" />"></script>
 
 <script>
-	$(document).ready(function() {
-		$(".toggleButton").hide();
-		$("#personalInfo").click(function() {
-			$(".toggleButton").toggle();
-		});
-	});
 	$(document)
 			.ready(
 					function() {
+						$(".toggleButton").hide();
+						$("#personalInfo").click(function() {
+							$(".toggleButton").toggle();
+						});
 						$("#addLink").hide();
 						$("#personalInfoRole")
 								.click(
@@ -65,7 +63,7 @@
 	</h2>
 	<h2>
 		<spring:url value="/user/update" var="urlUpdate">
-			<spring:param name="userId" value="${User.id}"/>
+			<spring:param name="userId" value="${User.id}" />
 		</spring:url>
 		<a href="${urlUpdate}">Update your information</a>
 	</h2>

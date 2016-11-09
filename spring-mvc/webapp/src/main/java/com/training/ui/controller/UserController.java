@@ -63,12 +63,15 @@ public class UserController extends AbstractController {
   
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
   public ModelAndView allUserView() {
-
+	log.debug("open page for view all users");
     List<User> userList = userDao.getAll();
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User user = userDao.getByLogin(userDetails.getUsername());
 
     ModelAndView model = new ModelAndView("allUsersList");
     model.addObject("lists", userList);
-
+    model.addObject("UserRole", user.getRole());
+    model.addObject("UserLogin", user.getLogin());
     return model;
   }
 }
