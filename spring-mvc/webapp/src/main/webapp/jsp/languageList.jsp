@@ -15,7 +15,7 @@
 <%
   MessageSource messageSource = (MessageSource) RequestContextUtils.getWebApplicationContext(request).getBean("messageSource");
   String defaultMessage = messageSource.getMessage("language", null, "DEFAULT", request.getLocale());
-  HashMap<String, String> availableLocales = new HashMap<>();
+  HashMap<String, String> availableLocales = new HashMap<String, String>();
   availableLocales.put(request.getLocale().getLanguage(), defaultMessage);
   for (Locale locale : Locale.getAvailableLocales()) {
     String msg = messageSource.getMessage("language", null, defaultMessage, locale);
