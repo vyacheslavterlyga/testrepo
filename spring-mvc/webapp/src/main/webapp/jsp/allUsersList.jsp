@@ -16,16 +16,41 @@
 	src="<spring:url value="/webjars/datatables/1.10.12/media/js/jquery.dataTables.js " />"></script>
 <script
 	src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/dataTables.buttons.js" />"></script>
+<script
+	src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/buttons.flash.js" />"></script>
+<script	src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 <script>
 	$(document).ready(function() {
+		/* myEditor = new $.fn.dataTable.Editor( {
+		    table: "#tableJson",
+		    fields: [ {
+		            label: "login",
+		            name: "login"
+		        }, {
+		            label: "password",
+		            name: "password"
+		        }, {
+		            label: "role",
+		            name: "role"
+		        }, {
+		            label: "startDate",
+		            name: "startDate"
+		        }, {
+		            label: "endDate",
+		            name: "endDate"
+		        }
+		    ]
+		} ); */
+
 		var data = eval('${userListJson}');
 		var table = $('#tableJson').DataTable({
-			dom: 'Bfrtip',
-			buttons : [ 'copy', 'excel', 'pdf' ],
+			//dom : 'Bfrtip',
+			//select : 'row',
+			//buttons : [ 'edit' ],
 			aaData : data,
 			aoColumns : [ {
 				"mData" : "login"
@@ -37,15 +62,30 @@
 				"mData" : "startDate"
 			}, {
 				"mData" : "endDate"
-			} ]
-		});
+			} , {
+	        	"data": "id",
+	            render: function ( data, type, row, meta ) {
+	            	var user_role = $('#user_role').val();	
+	            	var user_login = $('#user_login').val();	
+	            
+	            	if(user_role == 'ADMIN' || (user_role == 'USER' && user_login == row.login)){
+	            		return '<a href="update?userId=' + data + '">' + "edit" + '</a>';
+	            	} else {
+	            		return "";
+	            	}
+	                
+	        	}
+			}]
+		}); 
 	});
 </script>
 
 </head>
 <body>
+	<input id="user_role" hidden="true" value="${UserRole}"/>
+	<input id="user_login" hidden="true" value="${UserLogin}"/>
 
-	<table border="2">
+	<table border='1'>
 		<thead>
 			<tr>
 				<th>Login</th>
@@ -76,7 +116,7 @@
 	</table>
 	<br />
 	<br />
-	<table id='tableJson'>
+	<table id='tableJson' border="1">
 		<thead>
 			<tr>
 				<th>Login</th>
@@ -84,6 +124,7 @@
 				<th>Role</th>
 				<th>Start date</th>
 				<th>End date</th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 	</table>
