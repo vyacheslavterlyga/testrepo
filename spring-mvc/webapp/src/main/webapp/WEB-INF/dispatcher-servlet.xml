@@ -32,5 +32,7 @@
 	<mvc:view-resolvers>
 		<mvc:jsp suffix=".jsp" prefix="/jsp/" cache-views="false" />
 	</mvc:view-resolvers>
+	
+	<mvc:view-controller path="/" view-name="sp"/>
 
 </beans>

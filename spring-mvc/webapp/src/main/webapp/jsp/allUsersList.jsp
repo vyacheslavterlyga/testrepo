@@ -12,10 +12,33 @@
 <script src="<spring:url value="/webjars/jquery/1.12.0/jquery.js" />"></script>
 <script
 	src="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.js" />"></script>
+<script
+	src="<spring:url value="/webjars/datatables/1.10.12/media/js/jquery.dataTables.js " />"></script>
+<script
+	src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/dataTables.buttons.js" />"></script>
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
+<link rel="stylesheet"
+	href="<spring:url value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 <script>
 	$(document).ready(function() {
+		var data = eval('${userListJson}');
+		var table = $('#tableJson').DataTable({
+			dom: 'Bfrtip',
+			buttons : [ 'copy', 'excel', 'pdf' ],
+			aaData : data,
+			aoColumns : [ {
+				"mData" : "login"
+			}, {
+				"mData" : "password"
+			}, {
+				"mData" : "role"
+			}, {
+				"mData" : "startDate"
+			}, {
+				"mData" : "endDate"
+			} ]
+		});
 	});
 </script>
 
@@ -50,6 +73,19 @@
 				</c:if>
 			</tr>
 		</c:forEach>
+	</table>
+	<br />
+	<br />
+	<table id='tableJson'>
+		<thead>
+			<tr>
+				<th>Login</th>
+				<th>Password</th>
+				<th>Role</th>
+				<th>Start date</th>
+				<th>End date</th>
+			</tr>
+		</thead>
 	</table>
 
 	<p>

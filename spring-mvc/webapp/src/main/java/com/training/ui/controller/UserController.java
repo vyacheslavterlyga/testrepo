@@ -1,7 +1,11 @@
 package com.training.ui.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,11 +44,11 @@ public class UserController extends AbstractController {
   }
 
   @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
-  public ModelAndView saveNewUser(@ModelAttribute("User") User user) {
+  public String saveNewUser(@ModelAttribute("User") User user) {
     log.debug("open add User page; start insert User in DB");
     userDao.add(user);
     log.debug("User saved id:'{}'", user.getId());
-    return allUserView();
+    return "redirect:/user/allUsersList";
   }
   
   @RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -54,24 +58,27 @@ public class UserController extends AbstractController {
   }
   
   @RequestMapping(value = "/saveUpdateUser", method = RequestMethod.POST)
-  public ModelAndView saveUpdateUser(@ModelAttribute("User") User user) {
+  public String saveUpdateUser(@ModelAttribute("User") User user) {
     log.debug("start update User in DB");
     userDao.update(user);
     log.debug("User updated id:'{}'", user.getId());
-    return allUserView();
+    return "redirect:/user/allUsersList";
   }
   
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
-  public ModelAndView allUserView() {
+  public ModelAndView allUserView() throws JsonGenerationException, JsonMappingException, IOException {
 	log.debug("open page for view all users");
     List<User> userList = userDao.getAll();
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User user = userDao.getByLogin(userDetails.getUsername());
+    ObjectMapper objectMapper = new ObjectMapper();
+  
 
     ModelAndView model = new ModelAndView("allUsersList");
     model.addObject("lists", userList);
     model.addObject("UserRole", user.getRole());
     model.addObject("UserLogin", user.getLogin());
+    model.addObject("userListJson",  objectMapper.writeValueAsString(userDao.getAll()));
     return model;
   }
 }

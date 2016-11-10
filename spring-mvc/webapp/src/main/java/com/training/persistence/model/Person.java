@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,6 +46,7 @@ public class Person extends AbstractEntity {
 
   @OneToOne
   @JoinColumn(name = "user_id")
+  @JsonBackReference
   private User user;
 
 }
