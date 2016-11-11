@@ -11,49 +11,63 @@
 <link rel="stylesheet"
 	href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
 <script>
-	var stDate;
-	var enDate;
+	var startDateField;
+	var endDateField;
+	var loginField;
+	var passwordField;
+	var roleField;
 
 	$(document).ready(function() {
 		dateFormatLocation = "<spring:message code='datePatternJQuery'/>";
+		$('#submitButton').prop('disabled', true);
 
 		$("#startDate").datepicker();
 		$("#startDate").change(function() {
-			stDate = $(this).datepicker("getDate");
+			startDateField = $(this).datepicker("getDate");
 			validateDate();
-			$("#startDetails").text(stDate);
 			dateFormat: dateFormatLocation;
 		});
 
 		$("#endDate").datepicker();
 		$("#endDate").change(function() {
-			enDate = $(this).datepicker("getDate");
+			endDateField = $(this).datepicker("getDate");
 			validateDate();
-			$("#endDetails").text(enDate);
 			dateFormat: dateFormatLocation;
 		});
 	});
 
 	function validateDate() {
-		if (stDate == null) {
+		if (startDateField == "") {
 			alert('Start date should be filled!');
 			$("#startDate").focus();
-		} else if (enDate == null) {
+		} else if (endDateField == "") {
 			alert('End date should be filled!');
 			$("#endDate").focus();
-		} else if ((stDate == null) || (enDate == null)) {
+		} else if ((startDateField == "") || (endDateField == "")) {
 			alert('Date fields should be filled!');
 			$("#startDate").focus();
-		} else if (stDate > enDate) {
+		} else if (startDateField > endDateField) {
 			alert('Start date should be before End date!');
+			$.datepicker._clearDate('#startDate');
 			$("#startDate").focus();
+		}
+		checkEmptyFields();
+	}
+
+	function checkEmptyFields() {
+		loginField = $("#login").val();
+		passwordField = $("#password").val();
+		roleField = $("#role").val();
+
+		if (loginField != "" && passwordField != "" && roleField != ""
+				&& startDateField != null && endDateField != null) {
+			$('#submitButton').prop("disabled", false);
 		}
 	}
 </script>
 </head>
+
 <body>
-	Language:
-	<spring:message code='language' />
 	<jsp:include page="languageList.jsp"></jsp:include>
 	<br />
 	<table>
@@ -61,15 +75,15 @@
 		<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
 			<tr>
 				<td><spring:message code='label.login' /></td>
-				<td><form:input path="login" /></td>
+				<td><form:input type="textbox" path="login" value="" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.password' /></td>
-				<td><form:input path="password" /></td>
+				<td><form:input type="textbox" path="password" value="" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.role' /></td>
-				<td><form:input path="role" /></td>
+				<td><form:input type="textbox" path="role" value="" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>
@@ -83,15 +97,12 @@
 				<td><br /></td>
 			</tr>
 			<tr>
-				<td><form:button id="submitButton">Add this user</form:button>
-					<p id="submitStatus"></p></td>
+				<td><form:button id='submitButton'>Add this user</form:button>
 			</tr>
 		</form:form>
-
 	</table>
 	<br />
 	<br />
 	<a href="<spring:url value="/user/index"/>">Back</a>
-
 </body>
 </html>
