@@ -34,11 +34,16 @@
 			validateDate();
 			dateFormat: dateFormatLocation;
 		});
-		$("#login").change(function(){
-			 $.get("validateLogin", {login : $("#login").val()}).done(function(data) {
-				 if(data == "false"){
-				  $("#errorMessage").text("Incorrect login");
-				  } 	});
+		$("#login").change(function() {
+			$.get("validateLogin", {
+				login : $("#login").val()
+			}).done(function(data) {
+				if (data == "false") {
+					$("#errorMessage").text("Incorrect login");
+				} else {
+					$("#errorMessage").text("");
+				}
+			});
 		});
 	});
 
@@ -70,7 +75,6 @@
 			$('#submitButton').prop("disabled", false);
 		}
 	}
-	
 </script>
 </head>
 
