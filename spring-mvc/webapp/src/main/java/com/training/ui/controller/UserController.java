@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.training.persistence.dao.UserDAO;
 import com.training.persistence.model.User;
@@ -39,14 +41,19 @@ public class UserController extends AbstractController {
   }
 
   @RequestMapping(value = "/add", method = RequestMethod.GET)
-  public ModelAndView addUser() {
+  public ModelAndView addUser(@ModelAttribute("User") User user) {
     log.debug("open add User form page");
-    return new ModelAndView("addUserForm", "User", new User());
+    return new ModelAndView("addUserForm", "User", user);
   }
 
   @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
-  public String saveNewUser(@ModelAttribute("User") User user) {
+  public String saveNewUser(@ModelAttribute("User") User user,final RedirectAttributes redirectAttributes) {
     log.debug("open add User page; start insert User in DB");
+    if(userDao.getByLogin(user.getLogin()) != null){
+    	redirectAttributes.addFlashAttribute("User", user);
+    	redirectAttributes.addFlashAttribute("errorMessage", "User with this login is in DB");
+    	return "redirect:/user/add";
+    }
     userDao.add(user);
     log.debug("User saved id:'{}'", user.getId());
     return "redirect:/user/allUsersList";
@@ -63,7 +70,7 @@ public class UserController extends AbstractController {
 	  }
 	  User user = userDao.getById(id);
 	  return new ModelAndView("updateUserForm", "User", user);
-  }
+  } 
   
   @RequestMapping(value = "/saveUpdateUser", method = RequestMethod.POST)
   public String saveUpdateUser(@ModelAttribute("User") User user) {
@@ -71,6 +78,14 @@ public class UserController extends AbstractController {
     userDao.update(user);
     log.debug("User updated id:'{}'", user.getId());
     return "redirect:/user/allUsersList";
+  }
+  
+  @RequestMapping(value = "/validateLogin")
+  public @ResponseBody String validateLogin(@RequestParam("login")String login){
+	 if(userDao.getByLogin(login) != null){
+		  return "false";
+	  }
+	 return "true";
   }
   
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)

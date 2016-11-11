@@ -34,6 +34,12 @@
 			validateDate();
 			dateFormat: dateFormatLocation;
 		});
+		$("#login").change(function(){
+			 $.get("validateLogin", {login : $("#login").val()}).done(function(data) {
+				 if(data == "false"){
+				  $("#errorMessage").text("Incorrect login");
+				  } 	});
+		});
 	});
 
 	function validateDate() {
@@ -64,6 +70,7 @@
 			$('#submitButton').prop("disabled", false);
 		}
 	}
+	
 </script>
 </head>
 
@@ -71,6 +78,7 @@
 	<jsp:include page="languageList.jsp"></jsp:include>
 	<br />
 	<table>
+		<p id="errorMessage">${errorMessage}</p>
 		<spring:url value="/user/saveNewUser" var="saveUserUrl" />
 		<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
 			<tr>
