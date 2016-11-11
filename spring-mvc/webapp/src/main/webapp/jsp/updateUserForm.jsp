@@ -25,6 +25,13 @@
 		$("#endDate").datepicker({
 			dateFormat : dateFormatLocation
 		});
+		$("#deleteButton").click(function() {
+			var userIdJQuery = $("#userId").val();
+			$.get("deleteUser", {
+				Id : userIdJQuery
+			});
+			//location.href = "allUsersList";
+		});
 	});
 </script>
 </head>
@@ -65,7 +72,8 @@
 					<p id="submitStatus"></p></td>
 			</tr>
 		</form:form>
-
+		<br />
+		<button id="deleteButton">Delete current user</button>
 	</table>
 	<br />
 	<br />

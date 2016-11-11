@@ -29,7 +29,7 @@ public class UserController extends AbstractController {
 
   @Autowired
   UserDAO userDao;
-  
+
   @RequestMapping(value = "/index", method = RequestMethod.GET)
   public ModelAndView homePage() {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -51,20 +51,21 @@ public class UserController extends AbstractController {
     log.debug("User saved id:'{}'", user.getId());
     return "redirect:/user/allUsersList";
   }
-  
+
   @RequestMapping(value = "/update", method = RequestMethod.GET)
-  public ModelAndView updateUserForm(@RequestParam("userId") Long id) throws AccessException{
-	  UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	  User userById = userDao.getById(id);
-	  User userFromSessionSeq = userDao.getByLogin(userDetails.getUsername());
-	  
-	  if((!userById.getLogin().equals(userDetails.getUsername()) && userFromSessionSeq.getRole() != User.ROLE.ADMIN) || userFromSessionSeq.getRole() == User.ROLE.GUEST){
-		  throw new AccessException("You do not have access to this page");
-	  }
-	  User user = userDao.getById(id);
-	  return new ModelAndView("updateUserForm", "User", user);
+  public ModelAndView updateUserForm(@RequestParam("userId") Long id) throws AccessException {
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User userById = userDao.getById(id);
+    User userFromSessionSeq = userDao.getByLogin(userDetails.getUsername());
+
+    if (( !userById.getLogin().equals(userDetails.getUsername()) && userFromSessionSeq.getRole() != User.ROLE.ADMIN) ||
+      userFromSessionSeq.getRole() == User.ROLE.GUEST) {
+      throw new AccessException("You do not have access to this page");
+    }
+    User user = userDao.getById(id);
+    return new ModelAndView("updateUserForm", "User", user);
   }
-  
+
   @RequestMapping(value = "/saveUpdateUser", method = RequestMethod.POST)
   public String saveUpdateUser(@ModelAttribute("User") User user) {
     log.debug("start update User in DB");
@@ -72,21 +73,29 @@ public class UserController extends AbstractController {
     log.debug("User updated id:'{}'", user.getId());
     return "redirect:/user/allUsersList";
   }
-  
+
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
   public ModelAndView allUserView() throws JsonGenerationException, JsonMappingException, IOException {
-	log.debug("open page for view all users");
+    log.debug("open page for view all users");
     List<User> userList = userDao.getAll();
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User user = userDao.getByLogin(userDetails.getUsername());
     ObjectMapper objectMapper = new ObjectMapper();
-  
 
     ModelAndView model = new ModelAndView("allUsersList");
     model.addObject("lists", userList);
     model.addObject("UserRole", user.getRole());
     model.addObject("UserLogin", user.getLogin());
-    model.addObject("userListJson",  objectMapper.writeValueAsString(userDao.getAll()));
+    model.addObject("userListJson", objectMapper.writeValueAsString(userDao.getAll()));
     return model;
+  }
+
+  @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+  public String deleteCurrentUser(@RequestParam("Id") long id) {
+    log.debug("start deleting User from database");
+    User user = userDao.getById(id);
+    userDao.delete(user);
+    log.debug("user " + user.getLogin() + " deleted successfully");
+    return "redirect:/user/allUsersList";
   }
 }
