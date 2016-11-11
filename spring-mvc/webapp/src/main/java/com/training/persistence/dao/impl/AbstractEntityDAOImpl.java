@@ -29,12 +29,17 @@ abstract public class AbstractEntityDAOImpl<T extends AbstractEntity> implements
   public T getById(Long id) {
     return getSession().get(getGenericClass(), id);
   }
-  
+
   @Override
-	public T update(T entity) {
-		getSession().update(entity);
-		return entity;
-	}
+  public T update(T entity) {
+    getSession().update(entity);
+    return entity;
+  }
+
+  @Override
+  public void delete(T entity) {
+    getSession().delete(entity);
+  }
 
   private Class<? extends T> getGenericClass() {
     return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
