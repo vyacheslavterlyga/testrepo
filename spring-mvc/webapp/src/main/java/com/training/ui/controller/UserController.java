@@ -7,6 +7,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.AccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,14 @@ public class UserController extends AbstractController {
   }
   
   @RequestMapping(value = "/update", method = RequestMethod.GET)
-  public ModelAndView updateUserForm(@RequestParam("userId") Long id){
+  public ModelAndView updateUserForm(@RequestParam("userId") Long id) throws AccessException{
+	  UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  User userById = userDao.getById(id);
+	  User userFromSessionSeq = userDao.getByLogin(userDetails.getUsername());
+	  
+	  if((!userById.getLogin().equals(userDetails.getUsername()) && userFromSessionSeq.getRole() != User.ROLE.ADMIN) || userFromSessionSeq.getRole() == User.ROLE.GUEST){
+		  throw new AccessException("You do not have access to this page");
+	  }
 	  User user = userDao.getById(id);
 	  return new ModelAndView("updateUserForm", "User", user);
   }
