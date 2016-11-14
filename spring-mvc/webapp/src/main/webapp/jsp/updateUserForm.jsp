@@ -72,12 +72,14 @@
 					<p id="submitStatus"></p></td>
 			</tr>
 		</form:form>
+		<td></td>
 		<br />
-		<button id="deleteButton">Delete current user</button>
+
 	</table>
 	<br />
+	<button id="deleteButton">Delete current user</button>
 	<br />
-	<a href="<spring:url value="/user/index"/>">Back</a>
+	<a href="<spring:url value="/user/allUsersList"/>">Back</a>
 
 </body>
 </html>
