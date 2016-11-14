@@ -28,7 +28,7 @@
 		</form:form>
 	</div>
 	<div class="menuItem">
-		<spring:url value='index' var="urlIndexUser"/>
+		<spring:url value='/user/index' var="urlIndexUser"/>
 		<a href="${urlIndexUser}" style="text-decoration: none;">
 			<div>My account</div>
 		</a>
