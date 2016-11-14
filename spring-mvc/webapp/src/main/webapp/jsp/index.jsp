@@ -38,9 +38,8 @@
 </head>
 
 <body>
-	<jsp:include page="languageList.jsp" />
-	<h2>Hello, ${User.login}!</h2>
-
+	<jsp:include page="menu.jsp"></jsp:include>
+	<br />
 	<button id="personalInfo">Show/hide personal info</button>
 	<p class="toggleButton">Your ID in our database: ${User.id}</p>
 	<p class="toggleButton">Your login is "${User.login}"</p>

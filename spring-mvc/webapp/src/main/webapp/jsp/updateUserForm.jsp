@@ -36,7 +36,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="languageList.jsp" />
+	<jsp:include page="menu.jsp"></jsp:include>
 	<br />
 	<table>
 		<spring:url value="/user/saveUpdateUser" var="urlUpdateUser" />

@@ -79,7 +79,7 @@
 </head>
 
 <body>
-	<jsp:include page="languageList.jsp"></jsp:include>
+	<jsp:include page="menu.jsp"></jsp:include>
 	<br />
 	<table>
 		<p id="errorMessage">${errorMessage}</p>

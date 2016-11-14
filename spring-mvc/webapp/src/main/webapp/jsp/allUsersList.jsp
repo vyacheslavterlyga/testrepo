@@ -82,6 +82,7 @@
 
 </head>
 <body>
+<jsp:include page="menu.jsp"></jsp:include>
 	<input id="user_role" hidden="true" value="${UserRole}"/>
 	<input id="user_login" hidden="true" value="${UserLogin}"/>
 
