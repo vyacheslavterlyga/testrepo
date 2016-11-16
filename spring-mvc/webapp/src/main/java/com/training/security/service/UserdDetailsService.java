@@ -10,18 +10,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.training.persistence.dao.UserDAO;
-import com.training.persistence.model.User;
+import com.training.service.user.User;
+import com.training.service.user.UserServicePortType;
 
 @Service
 public class UserdDetailsService implements UserDetailsService {
 
   @Autowired
-  UserDAO userDAO;
+  UserServicePortType userService;
 
   @Override
   public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-    User userFromDB = userDAO.getByLogin(login);
+    User userFromDB = userService.getByLogin(login);
     List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + userFromDB.getRole()));
     return new org.springframework.security.core.userdetails.User(login, userFromDB.getPassword(), authorities);
   }

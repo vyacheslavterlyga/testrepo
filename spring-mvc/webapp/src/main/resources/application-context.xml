@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jee="http://www.springframework.org/schema/jee" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
-	<tx:annotation-driven />
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	
-	<context:component-scan base-package="com.training"/>
-	<bean class="com.training.persistence.dao.impl.UserDAOImpl"/>
-
-	<jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/MyLocalDB"
-		expected-type="javax.sql.DataSource" />
-
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dbDataSource" />
-		<property name="packagesToScan" value="com.training.persistence" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
-				<prop key="hibernate.ejb.naming_strategy">com.training.persistence.model</prop>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
-	</bean>
-	
-	
+	<import resource="classpath:META-INF/cxf/cxf*.xml" />
+	<jaxws:client id="userService" serviceClass="com.training.service.user.UserServicePortType"
+		address="http://localhost:8080/domain-service/" />
 
 </beans>

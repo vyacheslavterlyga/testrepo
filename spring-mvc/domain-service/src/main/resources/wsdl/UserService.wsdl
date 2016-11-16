@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="UserService" targetNamespace="http://user.service.training.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://user.service.training.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://user.service.training.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://user.service.training.com/">
+  <xs:complexType abstract="true" name="abstractEntity">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="user">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="login" type="xs:string"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element minOccurs="0" name="person" type="tns:person"/>
+          <xs:element minOccurs="0" name="role" type="tns:role"/>
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="person">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="age" type="xs:int"/>
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="user" type="tns:user"/> 
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="role">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ADMIN"/>
+      <xs:enumeration value="USER"/>
+      <xs:enumeration value="GUEST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="update" type="tns:update"/>
+  <xs:complexType name="update">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:abstractEntity"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="updateResponse" type="tns:updateResponse"/>
+  <xs:complexType name="updateResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getAll" type="tns:getAll"/>
+  <xs:complexType name="getAll">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="getAllResponse" type="tns:getAllResponse"/>
+  <xs:complexType name="getAllResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="return"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getById" type="tns:getById"/>
+  <xs:complexType name="getById">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="arg0" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getByIdResponse" type="tns:getByIdResponse"/>
+  <xs:complexType name="getByIdResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="add" type="tns:add"/>
+  <xs:complexType name="add">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="addResponse" type="tns:addResponse"/>
+  <xs:complexType name="addResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getByLogin" type="tns:getByLogin"/>
+  <xs:complexType name="getByLogin">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getByLoginResponse" type="tns:getByLoginResponse"/>
+  <xs:complexType name="getByLoginResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="delete" type="tns:delete"/>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="add">
+    <wsdl:part name="parameters" element="tns:add">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getById">
+    <wsdl:part name="parameters" element="tns:getById">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAll">
+    <wsdl:part name="parameters" element="tns:getAll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getByIdResponse">
+    <wsdl:part name="parameters" element="tns:getByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="parameters" element="tns:updateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part name="parameters" element="tns:deleteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllResponse">
+    <wsdl:part name="parameters" element="tns:getAllResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part name="parameters" element="tns:update">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getByLoginResponse">
+    <wsdl:part name="parameters" element="tns:getByLoginResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getByLogin">
+    <wsdl:part name="parameters" element="tns:getByLogin">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part name="parameters" element="tns:addResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserServicePortType">
+    <wsdl:operation name="update">
+      <wsdl:input name="update" message="tns:update">
+    </wsdl:input>
+      <wsdl:output name="updateResponse" message="tns:updateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAll">
+      <wsdl:input name="getAll" message="tns:getAll">
+    </wsdl:input>
+      <wsdl:output name="getAllResponse" message="tns:getAllResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getById">
+      <wsdl:input name="getById" message="tns:getById">
+    </wsdl:input>
+      <wsdl:output name="getByIdResponse" message="tns:getByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input name="add" message="tns:add">
+    </wsdl:input>
+      <wsdl:output name="addResponse" message="tns:addResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getByLogin">
+      <wsdl:input name="getByLogin" message="tns:getByLogin">
+    </wsdl:input>
+      <wsdl:output name="getByLoginResponse" message="tns:getByLoginResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input name="delete" message="tns:delete">
+    </wsdl:input>
+      <wsdl:output name="deleteResponse" message="tns:deleteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoapBinding" type="tns:UserServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getByLogin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getByLogin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getByLoginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserServicePort" binding="tns:UserServiceSoapBinding">
+      <soap:address location="http://localhost:9090/UserServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
