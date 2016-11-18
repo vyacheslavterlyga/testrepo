@@ -15,21 +15,18 @@ public class UserServiceImpl implements UserServicePortType {
   DozerBeanMapper dozerBeanMapper;
 
   @Override
-  public User add(User arg0) {
+  public User add(User user) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
   public User getById(Long id) {
-    com.training.persistence.model.User userBEO = userDAO.getById(id);
-    User userBOM = new User();
-    userBOM.setLogin(userBEO.getLogin());
-    return userBOM;
+    return translate(userDAO.getById(id));
   }
 
   @Override
-  public User update(AbstractEntity arg0) {
+  public User update(AbstractEntity user) {
     // TODO Auto-generated method stub
     return null;
   }
@@ -41,14 +38,18 @@ public class UserServiceImpl implements UserServicePortType {
   }
 
   @Override
-  public void delete(User arg0) {
+  public void delete(User user) {
     // TODO Auto-generated method stub
-
   }
 
   @Override
   public User getByLogin(String login) {
-    com.training.persistence.model.User userBEO = userDAO.getByLogin(login);
+    return translate(userDAO.getByLogin(login));
+  }
+
+  private User translate(com.training.persistence.model.User userBEO) {
+    if (userBEO == null)
+      return null;
     return dozerBeanMapper.map(userBEO, User.class);
   }
 
