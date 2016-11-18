@@ -17,46 +17,52 @@ public class UserServiceImpl implements UserServicePortType {
 
   @Override
   public User add(User user) {
-    com.training.persistence.model.User userBEO = dozerBeanMapper.map(user, com.training.persistence.model.User.class);
-    userDAO.add(userBEO);
+    userDAO.add(BOMtoBEO(user));
     return user;
   }
 
   @Override
   public User getById(Long id) {
-    com.training.persistence.model.User userBEO = userDAO.getById(id);
-    User userBOM = dozerBeanMapper.map(userBEO, User.class);
-    return userBOM;
+    return BEOToBOM(userDAO.getById(id));
   }
 
   @Override
   public User update(User user) {
-    userDAO.update(dozerBeanMapper.map(user, com.training.persistence.model.User.class));
+    userDAO.update(BOMtoBEO(user));
     return user;
   }
 
   @Override
   public Object getAll() {
-    List<com.training.persistence.model.User> userListBEO = userDAO.getAll();
-    return dozerBeanMapper.map(userListBEO, List.class);
+    return BOMListToBEOList(userDAO.getAll());
   }
 
   @Override
   public void delete(User user) {
-    userDAO.delete(dozerBeanMapper.map(user, com.training.persistence.model.User.class));
+    userDAO.delete(BOMtoBEO(user));
   }
 
   @Override
   public User getByLogin(String login) {
-    com.training.persistence.model.User userBEO = userDAO.getByLogin(login);
-    User userBOM = dozerBeanMapper.map(userBEO, User.class);
-    return userBOM;
+    return BEOToBOM(userDAO.getByLogin(login));
   }
 
-  private User translate(com.training.persistence.model.User userBEO) {
+  private User BEOToBOM(com.training.persistence.model.User userBEO) {
     if (userBEO == null)
       return null;
     return dozerBeanMapper.map(userBEO, User.class);
+  }
+
+  private com.training.persistence.model.User BOMtoBEO(User userBOM) {
+    if (userBOM == null)
+      return null;
+    return dozerBeanMapper.map(userBOM, com.training.persistence.model.User.class);
+  }
+
+  private Object BOMListToBEOList(List<com.training.persistence.model.User> userBEOList) {
+    if (userBEOList == null)
+      return null;
+    return dozerBeanMapper.map(userBEOList, List.class);
   }
 
 }
