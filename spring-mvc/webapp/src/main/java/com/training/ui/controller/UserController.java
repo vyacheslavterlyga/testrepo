@@ -11,6 +11,7 @@ import org.springframework.expression.AccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,7 @@ public class UserController extends AbstractController {
   }
 
   @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
-  public String saveNewUser(@ModelAttribute("User") User user, final RedirectAttributes redirectAttributes) {
+  public String saveNewUser(@ModelAttribute("User") User user, final RedirectAttributes redirectAttributes, BindingResult bindingResult) {
     log.debug("open add User page; start insert User in DB");
     if (userService.getByLogin(user.getLogin()) != null) {
       redirectAttributes.addFlashAttribute("User", user);
@@ -79,7 +80,7 @@ public class UserController extends AbstractController {
     log.debug("start update User in DB");
     userService.update(user);
     log.debug("User updated id:'{}'", user.getId());
-    return "redirect:/user/allUsersList";
+    return "redirect:/user/index";
   }
 
   @RequestMapping(value = "/validateLogin")

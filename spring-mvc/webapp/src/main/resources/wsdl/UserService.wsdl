@@ -2,38 +2,18 @@
 <wsdl:definitions name="UserService" targetNamespace="http://user.service.training.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://user.service.training.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
 <xs:schema xmlns:tns="http://user.service.training.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://user.service.training.com/">
-  <xs:complexType abstract="true" name="abstractEntity">
-    <xs:sequence/>
-  </xs:complexType>
   <xs:complexType name="user">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractEntity">
         <xs:sequence>
-          <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
           <xs:element minOccurs="0" name="id" type="xs:long"/>
           <xs:element minOccurs="0" name="login" type="xs:string"/>
           <xs:element minOccurs="0" name="password" type="xs:string"/>
-          <xs:element minOccurs="0" name="person" type="tns:person"/>
           <xs:element minOccurs="0" name="role" type="tns:role"/>
-          <xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="person">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractEntity">
-        <xs:sequence>
+          <xs:element minOccurs="0" name="startDate" type="xs:date"/>
           <xs:element minOccurs="0" name="age" type="xs:int"/>
-          <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="endDate" type="xs:date"/>
           <xs:element minOccurs="0" name="firstName" type="xs:string"/>
-          <xs:element minOccurs="0" name="id" type="xs:long"/>
           <xs:element minOccurs="0" name="lastName" type="xs:string"/>
-          <xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
-          <xs:element minOccurs="0" name="user" type="tns:user"/>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
   </xs:complexType>
   <xs:simpleType name="role">
     <xs:restriction base="xs:string">
@@ -45,7 +25,7 @@
   <xs:element name="update" type="tns:update"/>
   <xs:complexType name="update">
     <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:abstractEntity"/>
+      <xs:element form="qualified" minOccurs="0" name="user" type="tns:user"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="updateResponse" type="tns:updateResponse"/>

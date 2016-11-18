@@ -1,13 +1,16 @@
 package com.training.ui.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+
+import com.training.propertyeditors.XMLGregorianCalendarEditor;
 
 public class AbstractController {
 
@@ -18,9 +21,9 @@ public class AbstractController {
 
   @InitBinder
   protected void initBinder(ServletRequestDataBinder binder) throws Exception {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(messageSource.getMessage(DATE_PATTERN, null, null));
-    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-    binder.registerCustomEditor(Date.class, editor);
+    SimpleDateFormat dateFormat = new SimpleDateFormat(messageSource.getMessage(DATE_PATTERN, null, LocaleContextHolder.getLocale()));
+    XMLGregorianCalendarEditor editor = new XMLGregorianCalendarEditor(dateFormat, true);
+    binder.registerCustomEditor(XMLGregorianCalendar.class, editor);
   }
 
 }

@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mappings xmlns="http://dozer.sourceforge.net"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://dozer.sourceforge.net
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
-          
-  <mapping> 
-    <class-a>com.training.service.user.User</class-a>
-    <class-b>com.training.persistence.model.User</class-b>   
-  </mapping>  
+
+	<configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>yyyy-MM-dd</date-format>
+		<wildcard>true</wildcard>
+	</configuration>
+	<mapping>
+		<class-a>com.training.persistence.model.User</class-a>
+		<class-b>com.training.service.user.User</class-b>
+		<field>
+			<a>person.age</a>
+			<b>age</b>
+		</field>
+		<field>
+			<a>person.firstName</a>
+			<b>firstName</b>
+		</field>
+		<field>
+			<a>person.lastName</a>
+			<b>lastName</b>
+		</field>
+		<field>
+			<a>startDate</a>
+			<b>startDate</b>
+		</field>
+		<field>
+			<a>endDate</a>
+			<b>endDate</b>
+		</field>
+	</mapping>
 
 </mappings> 

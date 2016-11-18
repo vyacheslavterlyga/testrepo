@@ -16,11 +16,11 @@
 
 
 	<bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper">
-		<!-- <property name="mappingFiles">
+		<property name="mappingFiles">
 			<list>
 				<value>dozer-mapping.xml</value>
 			</list>
-		</property> -->
+		</property>
 	</bean>
 
 </beans>

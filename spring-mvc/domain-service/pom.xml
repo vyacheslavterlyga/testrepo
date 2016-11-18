@@ -65,7 +65,7 @@
 								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/wsdl/UserService.wsdl</wsdl>
 									<extraargs>
-										<!-- exclude package-info generation -->
+										exclude package-info generation
 										<extraarg>-xjc-npa</extraarg>
 									</extraargs>
 								</wsdlOption>

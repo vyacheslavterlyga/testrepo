@@ -57,6 +57,18 @@
 				<td><form:input path="role" /></td>
 			</tr>
 			<tr>
+				<td><spring:message code='label.firstName' /></td>
+				<td><form:input path="firstName" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code='label.lastName' /></td>
+				<td><form:input path="lastName" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code='label.age' /></td>
+				<td><form:input path="age" /></td>
+			</tr>
+			<tr>
 				<td><spring:message code='label.startDate' /></td>
 				<td><form:input type="text" path="startDate" /></td>
 			</tr>
@@ -79,7 +91,6 @@
 	<br />
 	<button id="deleteButton">Delete current user</button>
 	<br />
-	<a href="<spring:url value="/user/allUsersList"/>">Back</a>
 
 </body>
 </html>

@@ -19,7 +19,7 @@
 
 	$(document).ready(function() {
 		dateFormatLocation = "<spring:message code='datePatternJQuery'/>";
-		$('#submitButton').prop('disabled', true);
+		//$('#submitButton').prop('disabled', true);
 
 		$("#startDate").datepicker();
 		$("#startDate").change(function() {
@@ -72,7 +72,7 @@
 
 		if (loginField != "" && passwordField != "" && roleField != ""
 				&& startDateField != null && endDateField != null) {
-			$('#submitButton').prop("disabled", false);
+			//$('#submitButton').prop("disabled", false);
 		}
 	}
 </script>
@@ -81,8 +81,8 @@
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<br />
+	<p id="errorMessage">${errorMessage}</p>
 	<table>
-		<p id="errorMessage">${errorMessage}</p>
 		<spring:url value="/user/saveNewUser" var="saveUserUrl" />
 		<form:form modelAttribute="User" action="${saveUserUrl}" method="POST">
 			<tr>
@@ -96,6 +96,18 @@
 			<tr>
 				<td><spring:message code='label.role' /></td>
 				<td><form:input type="textbox" path="role" value="" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code='label.firstName' /></td>
+				<td><form:input path="firstName" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code='label.lastName' /></td>
+				<td><form:input path="lastName" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code='label.age' /></td>
+				<td><form:input path="age" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>
@@ -115,6 +127,5 @@
 	</table>
 	<br />
 	<br />
-	<a href="<spring:url value="/user/index"/>">Back</a>
 </body>
 </html>

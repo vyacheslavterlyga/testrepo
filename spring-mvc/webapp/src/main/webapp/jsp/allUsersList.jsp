@@ -25,27 +25,6 @@
 	href="<spring:url value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 <script>
 	$(document).ready(function() {
-		/* myEditor = new $.fn.dataTable.Editor( {
-		    table: "#tableJson",
-		    fields: [ {
-		            label: "login",
-		            name: "login"
-		        }, {
-		            label: "password",
-		            name: "password"
-		        }, {
-		            label: "role",
-		            name: "role"
-		        }, {
-		            label: "startDate",
-		            name: "startDate"
-		        }, {
-		            label: "endDate",
-		            name: "endDate"
-		        }
-		    ]
-		} ); */
-
 		var data = eval('${userListJson}');
 		var table = $('#tableJson').DataTable({
 			//dom : 'Bfrtip',
