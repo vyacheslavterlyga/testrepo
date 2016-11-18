@@ -27,9 +27,6 @@
 	$(document).ready(function() {
 		var data = eval('${userListJson}');
 		var table = $('#tableJson').DataTable({
-			//dom : 'Bfrtip',
-			//select : 'row',
-			//buttons : [ 'edit' ],
 			aaData : data,
 			aoColumns : [ {
 				"mData" : "login"
@@ -51,8 +48,7 @@
 	            		return '<a href="update?userId=' + data + '">' + "edit" + '</a>';
 	            	} else {
 	            		return "";
-	            	}
-	                
+	            	}	                
 	        	}
 			}]
 		}); 

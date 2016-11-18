@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.training.persistence.dao.UserDAO;
 
-// @javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(value = com.training.service.adapter.PersonAdapter.class, type
-// = com.training.service.user.Person.class)
 public class UserServiceImpl implements UserServicePortType {
 
   @Autowired

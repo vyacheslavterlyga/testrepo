@@ -35,7 +35,4 @@
 	</mvc:view-resolvers>
 
 	<mvc:view-controller path="/" view-name="sp" />
-
-	
-
 </beans>
