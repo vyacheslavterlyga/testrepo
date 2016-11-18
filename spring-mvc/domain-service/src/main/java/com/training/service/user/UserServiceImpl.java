@@ -55,4 +55,10 @@ public class UserServiceImpl implements UserServicePortType {
     return userBOM;
   }
 
+  private User translate(com.training.persistence.model.User userBEO) {
+    if (userBEO == null)
+      return null;
+    return dozerBeanMapper.map(userBEO, User.class);
+  }
+
 }
