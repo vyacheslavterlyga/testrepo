@@ -61,6 +61,22 @@ public class UserController extends AbstractController {
     return "redirect:/user/allUsersList";
   }
 
+  @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.POST)
+  public String addOrUpdateUser(
+      @ModelAttribute("User") User user,
+      final RedirectAttributes redirectAttributes,
+      BindingResult bindingResult) {
+    log.debug("Open add-or-update User page. Start inserting info into DB");
+    if (userService.getByLogin(user.getLogin()) != null) {
+      redirectAttributes.addFlashAttribute("User", user);
+      redirectAttributes.addFlashAttribute("errorMessage", "User with this login already exists in DB");
+      return "redirect:/user/add";
+    }
+    userService.add(user);
+    log.debug("User upated or saved with ID:'{}'", user.getId());
+    return "redirect:/user/allUsersList";
+  }
+
   @RequestMapping(value = "/update", method = RequestMethod.GET)
   public ModelAndView updateUserForm(@RequestParam("userId") Long id) throws AccessException {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
