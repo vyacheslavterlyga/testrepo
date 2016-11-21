@@ -65,8 +65,8 @@
 				<td><form:input path="lastName" /></td>
 			</tr>
 			<tr>
-				<td><spring:message code='label.age' /></td>
-				<td><form:input path="age" /></td>
+				<td><spring:message code='label.birthday' /></td>
+				<td><form:input path="birthday" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>

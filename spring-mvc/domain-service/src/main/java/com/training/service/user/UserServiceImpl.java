@@ -1,72 +1,55 @@
 package com.training.service.user;
 
-import java.util.List;
-
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.training.persistence.dao.UserDAO;
+import com.training.translator.impl.UserTranslator;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service
 public class UserServiceImpl implements UserServicePortType {
 
   @Autowired
   UserDAO userDAO;
 
   @Autowired
-  DozerBeanMapper dozerBeanMapper;
+  UserTranslator translator;
 
   @Override
-  public User add(User user) {
-    userDAO.add(bomToBeo(user));
-    return user;
+  public User add(User userBOM) {
+    com.training.persistence.model.User userAdded = userDAO.add(translator.toBEO(userBOM));
+    return translator.toBOM(userAdded);
   }
 
   @Override
   public User getById(Long id) {
     log.debug("get user by id:{}", id);
-    return beoToBom(userDAO.getById(id));
+    return translator.toBOM((userDAO.getById(id)));
   }
 
   @Override
-  public User update(User user) {
-    userDAO.update(bomToBeo(user));
-    return user;
+  public User update(User userBOM) {
+    com.training.persistence.model.User userMaped = translator.toBEO(userBOM);
+    com.training.persistence.model.User userUpdated = userDAO.update(userMaped);
+    return translator.toBOM(userUpdated);
   }
 
   @Override
   public Object getAll() {
-    return bomListToBeoList(userDAO.getAll());
+    return translator.toBOMList((userDAO.getAll()));
   }
 
   @Override
-  public void delete(User user) {
-    userDAO.delete(bomToBeo(user));
+  public void delete(User userBOM) {
+    userDAO.delete(translator.toBEO(userBOM));
   }
 
   @Override
   public User getByLogin(String login) {
-    return beoToBom(userDAO.getByLogin(login));
-  }
-
-  private User beoToBom(com.training.persistence.model.User userBEO) {
-    if (userBEO == null)
-      return null;
-    return dozerBeanMapper.map(userBEO, User.class);
-  }
-
-  private com.training.persistence.model.User bomToBeo(User userBOM) {
-    if (userBOM == null)
-      return null;
-    return dozerBeanMapper.map(userBOM, com.training.persistence.model.User.class);
-  }
-
-  private List<User> bomListToBeoList(List<com.training.persistence.model.User> userBEOList) {
-    if (userBEOList == null)
-      return null;
-    return dozerBeanMapper.map(userBEOList, List.class);
+    return translator.toBOM(userDAO.getByLogin(login));
   }
 
 }

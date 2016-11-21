@@ -15,8 +15,8 @@ class UserServiceFunctionalSpec extends Specification {
 
   def "getById"(){
     when:
-    int threadCnt = 500
-    int tryCount = 100
+    int threadCnt = 50
+    int tryCount = 10
     List<Thread> threads = []
     (1..threadCnt).each {
       threads << Thread.start {
