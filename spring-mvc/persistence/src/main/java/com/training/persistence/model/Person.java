@@ -36,7 +36,7 @@ public class Person extends AbstractEntity {
   private String lastName;
 
   @Column(name = "birthday")
-  private Date age;
+  private Date birthday;
 
   @Column(name = "start_date")
   private Date startDate;

@@ -12,8 +12,8 @@
 		<class-a>com.training.persistence.model.User</class-a>
 		<class-b>com.training.service.user.User</class-b>
 		<field>
-			<a>person.age</a>
-			<b>age</b>
+			<a>person.birthday</a>
+			<b>birthday</b>
 		</field>
 		<field>
 			<a>person.firstName</a>
