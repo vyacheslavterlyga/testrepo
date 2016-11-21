@@ -58,7 +58,7 @@ public class UserController extends AbstractController {
     }
     userService.add(user);
     log.debug("User saved id:'{}'", user.getId());
-    return "redirect:/user/allUsersList";
+    return "redirect:/user/index";
   }
 
   @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.POST)
@@ -124,7 +124,7 @@ public class UserController extends AbstractController {
   }
 
   @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-  public String deleteCurrentUser(@RequestParam("Id") long id) {
+  public String deleteCurrentUser(@RequestParam("Id") Long id) {
     log.debug("start deleting User from database");
     User user = userService.getById(id);
     userService.delete(user);

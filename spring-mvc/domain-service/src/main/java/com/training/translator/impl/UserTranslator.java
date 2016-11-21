@@ -29,6 +29,10 @@ public class UserTranslator implements Translator {
       return null;
     com.training.persistence.model.User userMaped = dozerBeanMapper.map(userBOM, com.training.persistence.model.User.class);
     userMaped.getPerson().setUser(userMaped);
+    Long userId = userMaped.getId();
+    if (userId != null) {
+      userMaped.getPerson().setId(userDAO.getById(userId).getPerson().getId());
+    }
     return userMaped;
   }
 

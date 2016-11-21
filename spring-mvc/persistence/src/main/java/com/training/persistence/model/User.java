@@ -2,6 +2,7 @@ package com.training.persistence.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,14 +20,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@SequenceGenerator(name = "userSeqGen", sequenceName = "AUSER_SEQUENCE")
+@SequenceGenerator(name = "userSequence", sequenceName = "AUSER_SEQUENCE", allocationSize = 1, initialValue = 1)
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
-  public static enum ROLE {ADMIN, USER, GUEST}
+  public static enum ROLE {
+      ADMIN,
+      USER,
+      GUEST
+  }
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSequence")
   @Column(name = "id")
   Long id;
 
@@ -46,7 +51,7 @@ public class User extends AbstractEntity {
   @Column(name = "end_date")
   private Date endDate;
 
-  @OneToOne(mappedBy = "user")
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Person person;
 
 }

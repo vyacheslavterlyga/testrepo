@@ -20,12 +20,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@SequenceGenerator(name = "personSeqGen", sequenceName = "PERSON_SEQUENCE")
+@SequenceGenerator(name = "personSequence", sequenceName = "PERSON_SEQUENCE", allocationSize = 1, initialValue = 1)
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeqGen")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSequence")
   @Column(name = "id")
   Long id;
 

@@ -9,19 +9,15 @@
 	    </layout>
 	</appender>
 
-	<logger name="org.springframework" level="debug" additivity="false">
+	<logger name="org.springframework" level="ERROR" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="org.hibernate" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
-	</logger>
-
 	<logger name="com.training" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<root level="DEBUG">
+	<root level="ERROR">
 		<appender-ref ref="STDOUT" />
 	</root>
 
