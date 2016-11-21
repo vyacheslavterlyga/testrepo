@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.training.persistence.dao.UserDAO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class UserServiceImpl implements UserServicePortType {
 
   @Autowired
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserServicePortType {
 
   @Override
   public User getById(Long id) {
+    log.debug("get user by id:{}", id);
     return BEOToBOM(userDAO.getById(id));
   }
 

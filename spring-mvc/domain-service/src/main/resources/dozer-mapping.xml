@@ -23,14 +23,6 @@
 			<a>person.lastName</a>
 			<b>lastName</b>
 		</field>
-		<field>
-			<a>startDate</a>
-			<b>startDate</b>
-		</field>
-		<field>
-			<a>endDate</a>
-			<b>endDate</b>
-		</field>
 	</mapping>
 
 </mappings> 
