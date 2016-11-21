@@ -43,7 +43,7 @@
 					$("#errorMessage").text("");
 				}
 			});
-		});
+		})
 		
 		function() {
 			loginField = $("#login").val();

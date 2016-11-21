@@ -83,7 +83,7 @@
 						pattern="${datePattern}" /></td>
 				<c:if
 					test="${UserRole == 'ADMIN' || (UserRole == 'USER' && UserLogin == listValue.login)}">
-					<td><spring:url value="/user/update" var="urlUpdate">
+					<td><spring:url value="/user/addOrUpdateUser" var="addOrUpdateUserUrl">
 							<spring:param name="userId" value="${listValue.id}" />
 						</spring:url> <a href="${urlUpdate}">edit</a></td>
 				</c:if>
