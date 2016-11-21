@@ -20,50 +20,50 @@ public class UserServiceImpl implements UserServicePortType {
 
   @Override
   public User add(User user) {
-    userDAO.add(BOMtoBEO(user));
+    userDAO.add(bomToBeo(user));
     return user;
   }
 
   @Override
   public User getById(Long id) {
     log.debug("get user by id:{}", id);
-    return BEOToBOM(userDAO.getById(id));
+    return beoToBom(userDAO.getById(id));
   }
 
   @Override
   public User update(User user) {
-    userDAO.update(BOMtoBEO(user));
+    userDAO.update(bomToBeo(user));
     return user;
   }
 
   @Override
   public Object getAll() {
-    return BOMListToBEOList(userDAO.getAll());
+    return bomListToBeoList(userDAO.getAll());
   }
 
   @Override
   public void delete(User user) {
-    userDAO.delete(BOMtoBEO(user));
+    userDAO.delete(bomToBeo(user));
   }
 
   @Override
   public User getByLogin(String login) {
-    return BEOToBOM(userDAO.getByLogin(login));
+    return beoToBom(userDAO.getByLogin(login));
   }
 
-  private User BEOToBOM(com.training.persistence.model.User userBEO) {
+  private User beoToBom(com.training.persistence.model.User userBEO) {
     if (userBEO == null)
       return null;
     return dozerBeanMapper.map(userBEO, User.class);
   }
 
-  private com.training.persistence.model.User BOMtoBEO(User userBOM) {
+  private com.training.persistence.model.User bomToBeo(User userBOM) {
     if (userBOM == null)
       return null;
     return dozerBeanMapper.map(userBOM, com.training.persistence.model.User.class);
   }
 
-  private Object BOMListToBEOList(List<com.training.persistence.model.User> userBEOList) {
+  private List<User> bomListToBeoList(List<com.training.persistence.model.User> userBEOList) {
     if (userBEOList == null)
       return null;
     return dozerBeanMapper.map(userBEOList, List.class);
