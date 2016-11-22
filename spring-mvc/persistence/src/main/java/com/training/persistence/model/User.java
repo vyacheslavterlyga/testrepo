@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@SequenceGenerator(name = "userSequence", sequenceName = "AUSER_SEQUENCE", allocationSize = 1, initialValue = 1)
 @Table(name = "AUSER")
 public class User extends AbstractEntity {
 
@@ -31,7 +30,8 @@ public class User extends AbstractEntity {
   }
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSequence")
+  @GeneratedValue(generator = "auserGenerator")
+  @GenericGenerator(name = "auserGenerator", strategy = "com.training.persistence.idgenereted.TriggerAssignedIdentityGenerator")
   @Column(name = "id")
   Long id;
 

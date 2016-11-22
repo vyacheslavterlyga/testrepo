@@ -5,14 +5,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,12 +19,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@SequenceGenerator(name = "personSequence", sequenceName = "PERSON_SEQUENCE", allocationSize = 1, initialValue = 1)
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSequence")
+  @GeneratedValue(generator = "personGenerator")
+  @GenericGenerator(name = "personGenerator", strategy = "com.training.persistence.idgenereted.TriggerAssignedIdentityGenerator")
   @Column(name = "id")
   Long id;
 
