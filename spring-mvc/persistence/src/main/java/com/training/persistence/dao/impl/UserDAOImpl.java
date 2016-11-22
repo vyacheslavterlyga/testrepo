@@ -1,8 +1,11 @@
 package com.training.persistence.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.training.persistence.dao.UserDAO;
 import com.training.persistence.model.User;
 
+@Repository
 public class UserDAOImpl extends AbstractEntityDAOImpl<User> implements UserDAO {
 
   @Override
