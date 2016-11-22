@@ -31,7 +31,7 @@ public class User extends AbstractEntity {
 
   @Id
   @GeneratedValue(generator = "auserGenerator")
-  @GenericGenerator(name = "auserGenerator", strategy = "com.training.persistence.idgenereted.TriggerAssignedIdentityGenerator")
+  @GenericGenerator(name = "auserGenerator", strategy = "org.hibernate.id.IdentityGenerator")
   @Column(name = "id")
   Long id;
 
