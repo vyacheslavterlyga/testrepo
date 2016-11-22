@@ -73,7 +73,8 @@
 		</thead>
 		<c:forEach var="listValue" items="${lists}">
 			<tr>
-				<td>${listValue.login}</td>
+			<form:form modelAttribute="listValue">
+				<td><form:label path="login"></form:label></td>
 				<td>${listValue.password}</td>
 				<td>${listValue.role}</td>
 				<td>${listValue.startDate}</td>
@@ -84,6 +85,7 @@
 							<spring:param name="userId" value="${listValue.id}" />
 						</spring:url> <a href="${urlUpdate}">edit</a></td>
 				</c:if>
+				</form:form>
 			</tr>
 		</c:forEach>
 	</table>
