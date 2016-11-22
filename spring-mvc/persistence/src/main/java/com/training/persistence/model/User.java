@@ -1,18 +1,12 @@
 package com.training.persistence.model;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,19 +15,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "AUSER")
-public class User extends AbstractEntity {
+public class User extends AbstractLifeCycleEntity {
 
   public static enum ROLE {
       ADMIN,
       USER,
       GUEST
   }
-
-  @Id
-  @GeneratedValue(generator = "auserGenerator")
-  @GenericGenerator(name = "auserGenerator", strategy = "org.hibernate.id.IdentityGenerator")
-  @Column(name = "id")
-  Long id;
 
   @Column(name = "login")
   private String login;
@@ -44,12 +32,6 @@ public class User extends AbstractEntity {
   @Column(name = "role")
   @Enumerated(value = EnumType.STRING)
   private ROLE role;
-
-  @Column(name = "start_date")
-  private Date startDate;
-
-  @Column(name = "end_date")
-  private Date endDate;
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Person person;
