@@ -34,14 +34,17 @@
       <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="getAll" type="tns:getAll"/>
-  <xs:complexType name="getAll">
-    <xs:sequence/>
-  </xs:complexType>
-  <xs:element name="getAllResponse" type="tns:getAllResponse"/>
-  <xs:complexType name="getAllResponse">
+  <xs:element name="getByLimit" type="tns:getByLimit"/>
+  <xs:complexType name="getByLimit">
     <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="return"/>
+      <xs:element form="qualified" minOccurs="0" name="firstRow" type="xs:int"/>
+      <xs:element form="qualified" minOccurs="0" name="countRows" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getByLimitResponse" type="tns:getByLimitResponse"/>
+  <xs:complexType name="getByLimitResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" maxOccurs="unbounded" name="users" type="tns:user"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="getById" type="tns:getById"/>
@@ -104,8 +107,8 @@
     <wsdl:part name="parameters" element="tns:getById">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getAll">
-    <wsdl:part name="parameters" element="tns:getAll">
+  <wsdl:message name="getByLimit">
+    <wsdl:part name="parameters" element="tns:getByLimit">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getByIdResponse">
@@ -120,8 +123,8 @@
     <wsdl:part name="parameters" element="tns:deleteResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getAllResponse">
-    <wsdl:part name="parameters" element="tns:getAllResponse">
+  <wsdl:message name="getByLimitResponse">
+    <wsdl:part name="parameters" element="tns:getByLimitResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="update">
@@ -147,10 +150,10 @@
       <wsdl:output name="updateResponse" message="tns:updateResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAll">
-      <wsdl:input name="getAll" message="tns:getAll">
+    <wsdl:operation name="getByLimit">
+      <wsdl:input name="getByLimit" message="tns:getByLimit">
     </wsdl:input>
-      <wsdl:output name="getAllResponse" message="tns:getAllResponse">
+      <wsdl:output name="getByLimitResponse" message="tns:getByLimitResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getById">
@@ -180,12 +183,12 @@
   </wsdl:portType>
   <wsdl:binding name="UserServiceSoapBinding" type="tns:UserServicePortType">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="getAll">
+    <wsdl:operation name="getByLimit">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="getAll">
+      <wsdl:input name="getByLimit">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="getAllResponse">
+      <wsdl:output name="getByLimitResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

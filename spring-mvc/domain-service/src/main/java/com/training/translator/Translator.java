@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface Translator {
+public interface Translator<BOM, BEO> {
 
-  Object toBOM(Object BEO);
+  BOM toBOM(BEO BEO);
 
-  Object toBEO(Object BOM);
+  BEO toBEO(BOM BOM);
 
-  List toBOMList(List BEOList);
+  List<BOM> toBOMList(List<BEO> userBEOList);
 
-  List toBEOList(List BOMList);
+  List<BEO> toBEOList(List<BOM> userBOMList);
 }

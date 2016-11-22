@@ -76,11 +76,8 @@
 				<td>${listValue.login}</td>
 				<td>${listValue.password}</td>
 				<td>${listValue.role}</td>
-				<spring:message code='datePattern' var="datePattern" />
-				<td><fmt:formatDate value="${listValue.startDate}"
-						pattern="${datePattern}" /></td>
-				<td><fmt:formatDate value="${listValue.endDate}"
-						pattern="${datePattern}" /></td>
+				<td>${listValue.startDate}</td>
+				<td>${listValue.endDate}</td>
 				<c:if
 					test="${UserRole == 'ADMIN' || (UserRole == 'USER' && UserLogin == listValue.login)}">
 					<td><spring:url value="/user/addOrUpdateUser" var="addOrUpdateUserUrl">

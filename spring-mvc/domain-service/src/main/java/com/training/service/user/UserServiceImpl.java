@@ -1,6 +1,9 @@
 package com.training.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.training.persistence.dao.UserDAO;
@@ -25,6 +28,7 @@ public class UserServiceImpl implements UserServicePortType {
   }
 
   @Override
+  @Cacheable("user")
   public User getById(Long id) {
     log.debug("get user by id:{}", id);
     return translator.toBOM((userDAO.getById(id)));
@@ -38,8 +42,10 @@ public class UserServiceImpl implements UserServicePortType {
   }
 
   @Override
-  public Object getAll() {
-    return translator.toBOMList((userDAO.getAll()));
+  public List<User> getByLimit(Integer firstRow, Integer countRows) {
+    List<com.training.persistence.model.User> byLimit = userDAO.getByLimit(firstRow, countRows);
+    List<User> bomList = translator.toBOMList(byLimit);
+    return bomList;
   }
 
   @Override
@@ -48,6 +54,7 @@ public class UserServiceImpl implements UserServicePortType {
   }
 
   @Override
+  @Cacheable("user")
   public User getByLogin(String login) {
     return translator.toBOM(userDAO.getByLogin(login));
   }

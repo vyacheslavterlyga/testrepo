@@ -110,7 +110,7 @@ public class UserController extends AbstractController {
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
   public ModelAndView allUserView() throws JsonGenerationException, JsonMappingException, IOException {
     log.debug("open page for view all users");
-    List<User> userList = (List<User>) userService.getAll();
+    List<User> userList = (List<User>) userService.getByLimit(10, 15);
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User user = userService.getByLogin(userDetails.getUsername());
     ObjectMapper objectMapper = new ObjectMapper();
@@ -119,7 +119,7 @@ public class UserController extends AbstractController {
     model.addObject("lists", userList);
     model.addObject("UserRole", user.getRole());
     model.addObject("UserLogin", user.getLogin());
-    model.addObject("userListJson", objectMapper.writeValueAsString(userService.getAll()));
+    //model.addObject("userListJson", objectMapper.writeValueAsString(userService.getAll()));
     return model;
   }
 
