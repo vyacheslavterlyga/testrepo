@@ -14,5 +14,8 @@ public interface UserDAO extends EntityDAO<User> {
   User getByLogin(String login);
 
   @Transactional(readOnly = true)
-  List<User> getByLimit(Integer firstRow, Integer countRows);
+  List<User> getByLimit(Integer firstRow, Integer countRows, String orderBy);
+
+  @Transactional(readOnly = true)
+  long getCount();
 }

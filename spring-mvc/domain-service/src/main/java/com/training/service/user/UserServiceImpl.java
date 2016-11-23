@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserServicePortType {
   }
 
   @Override
-  public List<User> getByLimit(Integer firstRow, Integer countRows) {
-    List<com.training.persistence.model.User> byLimit = userDAO.getByLimit(firstRow, countRows);
+  public List<User> getByLimit(Integer firstRow, Integer countRows, String orderBy) {
+    List<com.training.persistence.model.User> byLimit = userDAO.getByLimit(firstRow, countRows, orderBy);
     List<User> bomList = translator.toBOMList(byLimit);
     return bomList;
   }
@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserServicePortType {
   @Cacheable("user")
   public User getByLogin(String login) {
     return translator.toBOM(userDAO.getByLogin(login));
+  }
+
+  @Override
+  public Long getCount() {
+    return userDAO.getCount();
   }
 
 }

@@ -2,6 +2,8 @@ package com.training.persistence.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.training.persistence.dao.UserDAO;
@@ -15,9 +17,13 @@ public class UserDAOImpl extends AbstractEntityDAOImpl<User> implements UserDAO 
   }
 
   @Override
-  public List<User> getByLimit(Integer firstRow, Integer countRows) {
-    List<User> list = getGenericCriteria().setFirstResult(firstRow).setMaxResults(countRows).list();
+  public List<User> getByLimit(Integer firstRow, Integer countRows, String orderBy) {
+    List<User> list = getGenericCriteria().addOrder(Order.asc(orderBy)).setFirstResult(firstRow).setMaxResults(countRows).list();
     return list;
   }
 
+  @Override
+  public long getCount() {
+    return (long) getGenericCriteria().setProjection(Projections.rowCount()).uniqueResult();
+  }
 }

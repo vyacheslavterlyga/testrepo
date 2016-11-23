@@ -1,246 +1,282 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="UserService" targetNamespace="http://user.service.training.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://user.service.training.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
-  <wsdl:types>
-<xs:schema xmlns:tns="http://user.service.training.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://user.service.training.com/">
-  <xs:complexType name="user">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="id" type="xs:long"/>
-          <xs:element minOccurs="0" name="login" type="xs:string"/>
-          <xs:element minOccurs="0" name="password" type="xs:string"/>
-          <xs:element minOccurs="0" name="role" type="tns:role"/>
-          <xs:element minOccurs="0" name="birthday" type="xs:date"/>
-          <xs:element minOccurs="0" name="startDate" type="xs:date"/>
-          <xs:element minOccurs="0" name="endDate" type="xs:date"/>
-          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
-          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
-        </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name="role">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ADMIN"/>
-      <xs:enumeration value="USER"/>
-      <xs:enumeration value="GUEST"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="update" type="tns:update"/>
-  <xs:complexType name="update">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="user" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="updateResponse" type="tns:updateResponse"/>
-  <xs:complexType name="updateResponse">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getByLimit" type="tns:getByLimit"/>
-  <xs:complexType name="getByLimit">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="firstRow" type="xs:int"/>
-      <xs:element form="qualified" minOccurs="0" name="countRows" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getByLimitResponse" type="tns:getByLimitResponse"/>
-  <xs:complexType name="getByLimitResponse">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" maxOccurs="unbounded" name="users" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getById" type="tns:getById"/>
-  <xs:complexType name="getById">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="arg0" type="xs:long"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getByIdResponse" type="tns:getByIdResponse"/>
-  <xs:complexType name="getByIdResponse">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="add" type="tns:add"/>
-  <xs:complexType name="add">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="addResponse" type="tns:addResponse"/>
-  <xs:complexType name="addResponse">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getByLogin" type="tns:getByLogin"/>
-  <xs:complexType name="getByLogin">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="getByLoginResponse" type="tns:getByLoginResponse"/>
-  <xs:complexType name="getByLoginResponse">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="return" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="delete" type="tns:delete"/>
-  <xs:complexType name="delete">
-    <xs:sequence>
-      <xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
-  <xs:complexType name="deleteResponse">
-    <xs:sequence/>
-  </xs:complexType>
-</xs:schema>
-  </wsdl:types>
-  <wsdl:message name="add">
-    <wsdl:part name="parameters" element="tns:add">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="delete">
-    <wsdl:part name="parameters" element="tns:delete">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getById">
-    <wsdl:part name="parameters" element="tns:getById">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getByLimit">
-    <wsdl:part name="parameters" element="tns:getByLimit">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getByIdResponse">
-    <wsdl:part name="parameters" element="tns:getByIdResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part name="parameters" element="tns:updateResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part name="parameters" element="tns:deleteResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getByLimitResponse">
-    <wsdl:part name="parameters" element="tns:getByLimitResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="update">
-    <wsdl:part name="parameters" element="tns:update">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getByLoginResponse">
-    <wsdl:part name="parameters" element="tns:getByLoginResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getByLogin">
-    <wsdl:part name="parameters" element="tns:getByLogin">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="addResponse">
-    <wsdl:part name="parameters" element="tns:addResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="UserServicePortType">
-    <wsdl:operation name="update">
-      <wsdl:input name="update" message="tns:update">
-    </wsdl:input>
-      <wsdl:output name="updateResponse" message="tns:updateResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getByLimit">
-      <wsdl:input name="getByLimit" message="tns:getByLimit">
-    </wsdl:input>
-      <wsdl:output name="getByLimitResponse" message="tns:getByLimitResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getById">
-      <wsdl:input name="getById" message="tns:getById">
-    </wsdl:input>
-      <wsdl:output name="getByIdResponse" message="tns:getByIdResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="add">
-      <wsdl:input name="add" message="tns:add">
-    </wsdl:input>
-      <wsdl:output name="addResponse" message="tns:addResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getByLogin">
-      <wsdl:input name="getByLogin" message="tns:getByLogin">
-    </wsdl:input>
-      <wsdl:output name="getByLoginResponse" message="tns:getByLoginResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <wsdl:input name="delete" message="tns:delete">
-    </wsdl:input>
-      <wsdl:output name="deleteResponse" message="tns:deleteResponse">
-    </wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="UserServiceSoapBinding" type="tns:UserServicePortType">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="getByLimit">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="getByLimit">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getByLimitResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="update">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="update">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="updateResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getById">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="getById">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getByIdResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="add">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="add">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="addResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getByLogin">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="getByLogin">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getByLoginResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delete">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="delete">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="deleteResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="UserService">
-    <wsdl:port name="UserServicePort" binding="tns:UserServiceSoapBinding">
-      <soap:address location="http://localhost:9090/UserServicePort"/>
-    </wsdl:port>
-  </wsdl:service>
+<wsdl:definitions name="UserService" targetNamespace="http://user.service.training.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://user.service.training.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://user.service.training.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://user.service.training.com/">
+			<xs:complexType name="user">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="login" type="xs:string" />
+					<xs:element minOccurs="0" name="password" type="xs:string" />
+					<xs:element minOccurs="0" name="role" type="tns:role" />
+					<xs:element minOccurs="0" name="birthday" type="xs:date" />
+					<xs:element minOccurs="0" name="startDate" type="xs:date" />
+					<xs:element minOccurs="0" name="endDate" type="xs:date" />
+					<xs:element minOccurs="0" name="firstName" type="xs:string" />
+					<xs:element minOccurs="0" name="lastName" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="role">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="ADMIN" />
+					<xs:enumeration value="USER" />
+					<xs:enumeration value="GUEST" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="update" type="tns:update" />
+			<xs:complexType name="update">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="user" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="updateResponse" type="tns:updateResponse" />
+			<xs:complexType name="updateResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="return" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getByLimit" type="tns:getByLimit" />
+			<xs:complexType name="getByLimit">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="firstRow" type="xs:int" />
+					<xs:element form="qualified" minOccurs="0" name="countRows" type="xs:int" />
+					<xs:element form="qualified" minOccurs="0" name="orderBy" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getCount" type="tns:getCount" />
+			<xs:complexType name="getCount">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:element name="getByLimitResponse" type="tns:getByLimitResponse" />
+			<xs:complexType name="getByLimitResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" maxOccurs="unbounded" name="users" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getCountResponse" type="tns:getCountResponse" />
+			<xs:complexType name="getCountResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="count" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getById" type="tns:getById" />
+			<xs:complexType name="getById">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="arg0" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getByIdResponse" type="tns:getByIdResponse" />
+			<xs:complexType name="getByIdResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="return" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="add" type="tns:add" />
+			<xs:complexType name="add">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="addResponse" type="tns:addResponse" />
+			<xs:complexType name="addResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="return" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getByLogin" type="tns:getByLogin" />
+			<xs:complexType name="getByLogin">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="arg0" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getByLoginResponse" type="tns:getByLoginResponse" />
+			<xs:complexType name="getByLoginResponse">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="return" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="delete" type="tns:delete" />
+			<xs:complexType name="delete">
+				<xs:sequence>
+					<xs:element form="qualified" minOccurs="0" name="arg0" type="tns:user" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="deleteResponse" type="tns:deleteResponse" />
+			<xs:complexType name="deleteResponse">
+				<xs:sequence />
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="add">
+		<wsdl:part name="parameters" element="tns:add">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="delete">
+		<wsdl:part name="parameters" element="tns:delete">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getById">
+		<wsdl:part name="parameters" element="tns:getById">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getByLimit">
+		<wsdl:part name="parameters" element="tns:getByLimit">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCount">
+		<wsdl:part name="parameters" element="tns:getCount">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getByIdResponse">
+		<wsdl:part name="parameters" element="tns:getByIdResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateResponse">
+		<wsdl:part name="parameters" element="tns:updateResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteResponse">
+		<wsdl:part name="parameters" element="tns:deleteResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getByLimitResponse">
+		<wsdl:part name="parameters" element="tns:getByLimitResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCountResponse">
+		<wsdl:part name="parameters" element="tns:getCountResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="update">
+		<wsdl:part name="parameters" element="tns:update">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getByLoginResponse">
+		<wsdl:part name="parameters" element="tns:getByLoginResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getByLogin">
+		<wsdl:part name="parameters" element="tns:getByLogin">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addResponse">
+		<wsdl:part name="parameters" element="tns:addResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="UserServicePortType">
+		<wsdl:operation name="update">
+			<wsdl:input name="update" message="tns:update">
+			</wsdl:input>
+			<wsdl:output name="updateResponse" message="tns:updateResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getByLimit">
+			<wsdl:input name="getByLimit" message="tns:getByLimit">
+			</wsdl:input>
+			<wsdl:output name="getByLimitResponse" message="tns:getByLimitResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCount">
+			<wsdl:input name="getCount" message="tns:getCount">
+			</wsdl:input>
+			<wsdl:output name="getCountResponse" message="tns:getCountResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getById">
+			<wsdl:input name="getById" message="tns:getById">
+			</wsdl:input>
+			<wsdl:output name="getByIdResponse" message="tns:getByIdResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="add">
+			<wsdl:input name="add" message="tns:add">
+			</wsdl:input>
+			<wsdl:output name="addResponse" message="tns:addResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getByLogin">
+			<wsdl:input name="getByLogin" message="tns:getByLogin">
+			</wsdl:input>
+			<wsdl:output name="getByLoginResponse" message="tns:getByLoginResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input name="delete" message="tns:delete">
+			</wsdl:input>
+			<wsdl:output name="deleteResponse" message="tns:deleteResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="UserServiceSoapBinding" type="tns:UserServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getByLimit">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getByLimit">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getByLimitResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCount">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getCount">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getCountResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="update">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="update">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getById">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getById">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getByIdResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="add">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="add">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getByLogin">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getByLogin">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getByLoginResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="delete">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UserService">
+		<wsdl:port name="UserServicePort" binding="tns:UserServiceSoapBinding">
+			<soap:address location="http://localhost:9090/UserServicePort" />
+		</wsdl:port>
+	</wsdl:service>
 </wsdl:definitions>
