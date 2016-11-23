@@ -110,16 +110,30 @@ public class UserController extends AbstractController {
   @RequestMapping(value = "/allUsersList", method = RequestMethod.GET)
   public ModelAndView allUserView() throws JsonGenerationException, JsonMappingException, IOException {
     log.debug("open page for view all users");
-    List<User> userList = (List<User>) userService.getByLimit(10, 15);
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User user = userService.getByLogin(userDetails.getUsername());
     ObjectMapper objectMapper = new ObjectMapper();
 
     ModelAndView model = new ModelAndView("allUsersList");
-    model.addObject("lists", userList);
     model.addObject("UserRole", user.getRole());
     model.addObject("UserLogin", user.getLogin());
-    //model.addObject("userListJson", objectMapper.writeValueAsString(userService.getAll()));
+    model.addObject("userListJson", objectMapper.writeValueAsString(userService.getByLimit(5, 7, "id")));
+    model.addObject("Count", userService.getCount());
+    return model;
+  }
+
+  @RequestMapping(value = "/getAllUsersTable", method = RequestMethod.GET)
+  private @ResponseBody ModelAndView showTable(
+      @RequestParam("firstRow") int firstRow,
+      @RequestParam("countRows") int countRows,
+      @RequestParam("orderBy") String orderBy) {
+    ModelAndView model = new ModelAndView("allUsersTable");
+    List<User> userList = userService.getByLimit(firstRow, countRows, orderBy);
+
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User user = userService.getByLogin(userDetails.getUsername());
+    model.addObject("lists", userList);
+    model.addObject("UserRole", user.getRole());
     return model;
   }
 
