@@ -74,6 +74,9 @@
 										<!-- exclude package-info generation -->
 										<extraarg>-xjc-npa</extraarg>
 									</extraargs>
+									<bindingFiles>
+                            			<bindingFile>${basedir}/src/main/resources/bindings.xml</bindingFile>
+                        			</bindingFiles>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
