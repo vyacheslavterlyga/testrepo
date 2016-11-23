@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.training.persistence.dao.UserDAO;
-import com.training.translator.impl.UserTranslator;
+import com.training.translator.Translator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserServicePortType {
   UserDAO userDAO;
 
   @Autowired
-  UserTranslator translator;
+  Translator<com.training.service.user.User, com.training.persistence.model.User> translator;
 
   @Override
   public User add(User userBOM) {
@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserServicePortType {
   @Override
   public User update(User userBOM) {
     com.training.persistence.model.User userMaped = translator.toBEO(userBOM);
+    Long userId = userMaped.getId();
+    if (userId != null) {
+      userMaped.getPerson().setId(userDAO.getById(userId).getPerson().getId());
+    }
     com.training.persistence.model.User userUpdated = userDAO.update(userMaped);
     return translator.toBOM(userUpdated);
   }

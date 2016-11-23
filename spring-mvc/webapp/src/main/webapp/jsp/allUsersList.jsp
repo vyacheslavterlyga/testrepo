@@ -73,11 +73,11 @@
 		</thead>
 		<c:forEach var="listValue" items="${lists}">
 			<tr>
-			<form:form modelAttribute="listValue">
-				<td><form:label path="login"></form:label></td>
+				<td>${listValue.login}</td>
 				<td>${listValue.password}</td>
 				<td>${listValue.role}</td>
-				<td>${listValue.startDate}</td>
+				<spring:message var="datePattern" code="datePattern"/>
+				<td><fmt:formatDate value="${listValue.startDate.toGregorianCalendar().time}" pattern="${datePattern}"/></td>
 				<td>${listValue.endDate}</td>
 				<c:if
 					test="${UserRole == 'ADMIN' || (UserRole == 'USER' && UserLogin == listValue.login)}">
@@ -85,7 +85,6 @@
 							<spring:param name="userId" value="${listValue.id}" />
 						</spring:url> <a href="${urlUpdate}">edit</a></td>
 				</c:if>
-				</form:form>
 			</tr>
 		</c:forEach>
 	</table>
