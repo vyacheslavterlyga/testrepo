@@ -52,7 +52,7 @@
 	<p id="roleSwither"></p>
 
 	<h2>
-		<a id="addLink" href="<spring:url value="/user/add"/>">Add new
+		<a id="addLink" href="<spring:url value="/user/addOrUpdateUser"/>">Add new
 			user</a>
 	</h2>
 
@@ -60,7 +60,7 @@
 		<a href="<spring:url value="/user/allUsersList"/>">View all users</a>
 	</h2>
 	<h2>
-		<spring:url value="/user/update" var="urlUpdate">
+		<spring:url value="/user/addOrUpdateUser" var="urlUpdate">
 			<spring:param name="userId" value="${User.id}" />
 		</spring:url>
 		<a href="${urlUpdate}">Update your information</a>

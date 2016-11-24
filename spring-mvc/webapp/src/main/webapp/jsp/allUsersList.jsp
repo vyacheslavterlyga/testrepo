@@ -81,8 +81,8 @@
 
 						$('#next').click(
 							function() {
-								firstRow += $('#showEntitiesSelector').val();
-								if (firstRow + $('#showEntitiesSelector').val() <= $('#count').val()) {
+								firstRow += parseInt($('#showEntitiesSelector').val());
+								if (firstRow + parseInt($('#showEntitiesSelector').val()) <= $('#count').val()) {
 								showTable();
 								}
 						});

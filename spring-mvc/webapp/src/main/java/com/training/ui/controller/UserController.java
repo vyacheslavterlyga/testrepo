@@ -11,7 +11,6 @@ import org.springframework.expression.AccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,61 +41,52 @@ public class UserController extends AbstractController {
     return new ModelAndView("index", "User", user);
   }
 
-  @RequestMapping(value = "/add", method = RequestMethod.GET)
-  public ModelAndView addUser(@ModelAttribute("User") User user) {
-    log.debug("open add User form page");
-    return new ModelAndView("addUserForm", "User", user);
-  }
+  @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.GET, params = "userId")
+  public ModelAndView addOrUpdateUser(@RequestParam("userId") Long userId) throws AccessException {
+    log.debug("Open add-or-update User page");//. Start inserting info into DB");
 
-  @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
-  public String saveNewUser(@ModelAttribute("User") User user, final RedirectAttributes redirectAttributes, BindingResult bindingResult) {
-    log.debug("open add User page; start insert User in DB");
-    if (userService.getByLogin(user.getLogin()) != null) {
-      redirectAttributes.addFlashAttribute("User", user);
-      redirectAttributes.addFlashAttribute("errorMessage", "User with this login already exists in DB");
-      return "redirect:/user/add";
-    }
-    userService.add(user);
-    log.debug("User saved id:'{}'", user.getId());
-    return "redirect:/user/index";
-  }
-
-  @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.POST)
-  public String addOrUpdateUser(
-      @ModelAttribute("User") User user,
-      final RedirectAttributes redirectAttributes,
-      BindingResult bindingResult) {
-    log.debug("Open add-or-update User page. Start inserting info into DB");
-    if (userService.getByLogin(user.getLogin()) != null) {
-      redirectAttributes.addFlashAttribute("User", user);
-      redirectAttributes.addFlashAttribute("errorMessage", "User with this login already exists in DB");
-      return "redirect:/user/add";
-    }
-    userService.add(user);
-    log.debug("User upated or saved with ID:'{}'", user.getId());
-    return "redirect:/user/allUsersList";
-  }
-
-  @RequestMapping(value = "/update", method = RequestMethod.GET)
-  public ModelAndView updateUserForm(@RequestParam("userId") Long id) throws AccessException {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User userById = userService.getById(id);
-    User userFromSessionSeq = userService.getByLogin(userDetails.getUsername());
-
-    if (( !userById.getLogin().equals(userDetails.getUsername()) && userFromSessionSeq.getRole() != Role.ADMIN) ||
-      userFromSessionSeq.getRole() == Role.GUEST) {
-      throw new AccessException("You do not have access to this page");
+    ModelAndView modelAndView = new ModelAndView("addOrUpdateUser");
+    if (userId == null) {
+      if (getCurrentUser().getRole() != Role.ADMIN) {
+        throw new AccessException("You are not admin!!!");
+      } else {
+        modelAndView.addObject("User", new User());
+      }
+    } else {
+      if (( !getCurrentUser().getLogin().equals(userDetails.getUsername()) && getCurrentUser().getRole() != Role.ADMIN) ||
+        getCurrentUser().getRole() == Role.GUEST) {
+        throw new AccessException("You have not access on this page!!!");
+      } else {
+        modelAndView.addObject("User", userService.getById(userId));
+      }
     }
-    User user = userService.getById(id);
-    return new ModelAndView("updateUserForm", "User", user);
+    return modelAndView;
   }
 
-  @RequestMapping(value = "/saveUpdateUser", method = RequestMethod.POST)
-  public String saveUpdateUser(@ModelAttribute("User") User user) {
-    log.debug("start update User in DB");
-    userService.update(user);
-    log.debug("User updated id:'{}'", user.getId());
-    return "redirect:/user/index";
+  @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.GET)
+  public ModelAndView addOrUpdateUser() throws AccessException {
+    return addOrUpdateUser(null);
+  }
+
+  @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+  public ModelAndView saveUser(@ModelAttribute("User") User user, final RedirectAttributes redirectAttributes) throws Exception {
+    if (user.getId() == null) {
+      log.debug("Start add new user");
+      if (userService.getByLogin(user.getLogin()) != null) {
+        throw new Exception("User with this login already is in DB!!!");
+      } else {
+        userService.add(user);
+      }
+    } else {
+      if (userService.getById(user.getId()) == null) {
+        throw new Exception("This user are not in DB!!!");
+      } else {
+        log.debug("Start update user");
+        userService.update(user);
+      }
+    }
+    return homePage();
   }
 
   @RequestMapping(value = "/validateLogin")
@@ -144,5 +134,11 @@ public class UserController extends AbstractController {
     userService.delete(user);
     log.debug("user " + user.getLogin() + " deleted successfully");
     return "redirect:/user/allUsersList";
+  }
+
+  private User getCurrentUser() {
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User user = userService.getByLogin(userDetails.getUsername());
+    return user;
   }
 }

@@ -3,6 +3,7 @@ package com.training.service.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +28,14 @@ public class UserServiceImpl implements UserServicePortType {
     return translator.toBOM(userAdded);
   }
 
+  @Cacheable(cacheNames = "user", key = "#id")
   @Override
-  @Cacheable("user")
   public User getById(Long id) {
     log.debug("get user by id:{}", id);
     return translator.toBOM((userDAO.getById(id)));
   }
 
+  @CacheEvict(cacheNames = "user", key = "#userBOM.id")
   @Override
   public User update(User userBOM) {
     com.training.persistence.model.User userMaped = translator.toBEO(userBOM);
@@ -52,6 +54,7 @@ public class UserServiceImpl implements UserServicePortType {
     return bomList;
   }
 
+  @CacheEvict(cacheNames = "user", key = "#userBOM.id")
   @Override
   public void delete(User userBOM) {
     userDAO.delete(translator.toBEO(userBOM));

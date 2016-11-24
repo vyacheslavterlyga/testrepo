@@ -111,7 +111,7 @@
 			</tr>
 			<tr>
 				<td><spring:message code='label.startDate' /></td>
-				<td><form:input type="text" path="startDate" /></td>
+				<td><form:input type="date" path="startDate" /></td>
 			</tr>
 			<tr>
 				<td><spring:message code='label.endDate' /></td>

@@ -19,7 +19,7 @@ public abstract class AbstractTranslator<BOM, BEO> implements Translator<BOM, BE
   }
 
   protected Class<BEO> getGenericBEOClass() {
-    return (Class<BEO>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    return (Class<BEO>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
   }
 
   @Override
@@ -34,7 +34,6 @@ public abstract class AbstractTranslator<BOM, BEO> implements Translator<BOM, BE
     if (userBOM == null)
       return null;
     BEO userMaped = dozerBeanMapper.map(userBOM, getGenericBEOClass());
-    // userMaped.getPerson().setUser(userMaped);
     return userMaped;
   }
 

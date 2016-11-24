@@ -8,6 +8,6 @@
 	
 	<import resource="classpath:META-INF/cxf/cxf*.xml" />
 	<jaxws:client id="userService" serviceClass="com.training.service.user.UserServicePortType"
-		address="http://localhost:8080/domain-service/" />
+		address="http://vyacheslavt:8080/domain-service/" />
 
 </beans>
