@@ -149,7 +149,7 @@ $(document).ready(function() {
 				<td><br /></td>
 			</tr>
 			<tr>
-				<td><form:button id='submitButton'></form:button>
+				<td><form:button id='submitButton'>Submit</form:button>
 			</tr>
 		</form:form>
 	</table>

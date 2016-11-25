@@ -42,6 +42,7 @@
 					<xs:element form="qualified" minOccurs="0" name="firstRow" type="xs:int" />
 					<xs:element form="qualified" minOccurs="0" name="countRows" type="xs:int" />
 					<xs:element form="qualified" minOccurs="0" name="orderBy" type="xs:string" />
+					<xs:element form="qualified" minOccurs="0" name="asc" type="xs:boolean" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:element name="getCount" type="tns:getCount" />

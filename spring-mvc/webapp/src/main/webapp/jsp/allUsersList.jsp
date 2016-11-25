@@ -62,12 +62,14 @@ value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 										});
 
 						var order = "id";
-						
+						var asc = true;
+												
 						$('#showTable').click(function() {
 							showTable();
 						});
 
 						var firstRow = 0;
+						
 						$('#prev').click(function() {
 							firstRow -= parseInt($('#showEntitiesSelector').val());
 							if (firstRow < 0) {
@@ -75,26 +77,49 @@ value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 							}
 							showTable();
 						});
-
+											
 						$('#next').click(
 								function() {
 									firstRow += parseInt($('#showEntitiesSelector').val());
 									if (firstRow + parseInt($('#showEntitiesSelector').val()) <= parseInt($('#count').val())) {
 										showTable();
 									}
-								});
-
-						var showTable = function() {
+						});
+						
+						$('#first').click(
+								function() {
+									firstRow = 0;
+									showTable();
+									});
+						
+						$('#last').click(
+								function() {
+									firstRow = parseInt($('#count').val())-(parseInt($('#count').val())%$('#showEntitiesSelector').val());
+									showTable();
+							});
+																	
+							var showTable = function() {
 							$('#curr').text(firstRow / parseInt($('#showEntitiesSelector').val()) + 1);
 							var entitiesOnTable = parseInt($('#showEntitiesSelector').val());
 								$.get("getAllUsersTable", {
 								"firstRow" : firstRow,
 								"countRows" :	entitiesOnTable,
-								"orderBy" : order
+								"orderBy" : order,
+								"asc" : asc
 							}).done(function(data) {
 								$('#allUsersTable').html (data);
+								if (asc) {
+									$('#' + order).children().text(' ↑');
+								} else {
+									$('#' + order).children().text(' ↓');
+								}
 								$('.selectedColumn').click(function(){
 									order = $(this).attr('id');
+									if (asc) {															
+										asc = false;
+									} else {										
+									asc = true;
+									};
 									showTable();
 								});														
 							});
@@ -118,9 +143,11 @@ value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 			<option>50</option>
 			<option>100</option>
 		</select> of ${Count} entities <br /> <br />
+		<button id='first'> |<< First </button>
 		<button id='prev'> <<< Prev. </button>
 		<button id='curr'></button>
 		<button id='next'> Next >>> </button>
+		<button id='last'> Last >>| </button>
 	</p>
 	<div id="allUsersTable"></div>
 	<br />

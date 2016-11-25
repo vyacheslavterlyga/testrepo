@@ -43,7 +43,7 @@ public class UserController extends AbstractController {
 
   @RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.GET, params = "userId")
   public ModelAndView addOrUpdateUser(@RequestParam("userId") Long userId) throws AccessException {
-    log.debug("Open add-or-update User page");//. Start inserting info into DB");
+    log.debug("Open add-or-update User page");
 
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     ModelAndView modelAndView = new ModelAndView("addOrUpdateUser");
@@ -51,13 +51,15 @@ public class UserController extends AbstractController {
       if (getCurrentUser().getRole() != Role.ADMIN) {
         throw new AccessException("You are not admin!!!");
       } else {
+        log.debug("Start inserting info into DB");
         modelAndView.addObject("User", new User());
       }
     } else {
-      if (( !getCurrentUser().getLogin().equals(userDetails.getUsername()) && getCurrentUser().getRole() != Role.ADMIN) ||
+      if (( !getCurrentUser().getLogin().equals(userService.getById(userId).getLogin()) && getCurrentUser().getRole() == Role.USER) ||
         getCurrentUser().getRole() == Role.GUEST) {
         throw new AccessException("You have not access on this page!!!");
       } else {
+        log.debug("Start updating info in DB");
         modelAndView.addObject("User", userService.getById(userId));
       }
     }
@@ -107,7 +109,7 @@ public class UserController extends AbstractController {
     ModelAndView model = new ModelAndView("allUsersList");
     model.addObject("UserRole", user.getRole());
     model.addObject("UserLogin", user.getLogin());
-    model.addObject("userListJson", objectMapper.writeValueAsString(userService.getByLimit(5, 7, "id")));
+    model.addObject("userListJson", objectMapper.writeValueAsString(userService.getByLimit(5, 7, "id", true)));
     model.addObject("Count", userService.getCount());
     return model;
   }
@@ -116,9 +118,10 @@ public class UserController extends AbstractController {
   private @ResponseBody ModelAndView showTable(
       @RequestParam("firstRow") int firstRow,
       @RequestParam("countRows") int countRows,
-      @RequestParam("orderBy") String orderBy) {
+      @RequestParam("orderBy") String orderBy,
+      @RequestParam("asc") Boolean asc) {
     ModelAndView model = new ModelAndView("allUsersTable");
-    List<User> userList = userService.getByLimit(firstRow, countRows, orderBy);
+    List<User> userList = userService.getByLimit(firstRow, countRows, orderBy, asc);
 
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User user = userService.getByLogin(userDetails.getUsername());

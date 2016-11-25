@@ -25,5 +25,4 @@ public class AbstractController {
     XMLGregorianCalendarEditor editor = new XMLGregorianCalendarEditor(dateFormat, true);
     binder.registerCustomEditor(XMLGregorianCalendar.class, editor);
   }
-
 }
