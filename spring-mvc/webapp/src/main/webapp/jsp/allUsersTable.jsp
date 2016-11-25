@@ -5,11 +5,11 @@
 <table border='1'>
 	<thead>
 		<tr>
-			<th>Login</th>
-			<th>Password</th>
-			<th>Role</th>
-			<th>Start date</th>
-			<th>End date</th>
+			<th class="selectedColumn" id = "login">Login ⬍</th>
+			<th class="selectedColumn" id = "password">Password ⬍</th>
+			<th class="selectedColumn" id = "role">Role ⬍</th>
+			<th class="selectedColumn" id = "startDate">Start date ⬍</th>
+			<th class="selectedColumn" id = "endDate">End date ⬍</th>
 		</tr>
 	</thead>
 	<c:forEach var="listValue" items="${lists}">

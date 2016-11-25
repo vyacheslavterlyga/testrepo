@@ -9,20 +9,26 @@
 <title>All users</title>
 <script src="<spring:url value="/webjars/jquery/1.12.0/jquery.js" />"></script>
 <script src="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.js" />"></script>
-<script src="<spring:url value="/webjars/datatables/1.10.12/media/js/jquery.dataTables.js " />"></script>
-<script src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/dataTables.buttons.js" />"></script>
-<script src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/buttons.flash.js" />"></script>
+<script src="<spring:url value="/webjars/datatables/1.10.12/media/js/jquery.dataTables.js " 
+
+/>"></script>
+<script src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/dataTables.buttons.js" 
+
+/>"></script>
+<script src="<spring:url value="/webjars/datatables.net-buttons/1.2.2/js/buttons.flash.js" 
+
+/>"></script>
 <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <link rel="stylesheet" href="<spring:url value="/webjars/jquery-ui/1.12.1/jquery-ui.css"/>">
-<link rel="stylesheet" href="<spring:url value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
+<link rel="stylesheet" href="<spring:url 
+
+value="/webjars/datatables/1.10.12/media/css/jquery.dataTables.css"/>">
 <script>
 	$(document)
 			.ready(
 					function() {
 						var data = eval('${userListJson}');
-						var table = $('#tableJson')
-								.DataTable(
-										{
+						var table = $('#tableJson').DataTable({
 											aaData : data,
 											aoColumns : [
 													{
@@ -42,37 +48,28 @@
 													},
 													{
 														"data" : "id",
-														render : function(data,
-																type, row, meta) {
-															var user_role = $(
-																	'#user_role')
-																	.val();
-															var user_login = $(
-																	'#user_login')
-																	.val();
+														render : function(data, type, row, meta) {
+															var user_role = $('#user_role').val();
+															var user_login = $('#user_login').val();
 
-															if (user_role == 'ADMIN'
-																	|| (user_role == 'USER' && user_login == row.login)) {
-																return '<a href="update?userId='
-																		+ data
-																		+ '">'
-																		+ "edit"
-																		+ '</a>';
+															if (user_role == 'ADMIN' || (user_role == 'USER' && user_login == row.login)) {
+																return '<a href="update?userId=' + data + '">' + "edit" + '</a>';
 															} else {
 																return "";
 															}
 														}
 													} ]
-
 										});
 
+						var order = "id";
+						
 						$('#showTable').click(function() {
 							showTable();
 						});
 
 						var firstRow = 0;
 						$('#prev').click(function() {
-							firstRow -= $('#showEntitiesSelector').val();
+							firstRow -= parseInt($('#showEntitiesSelector').val());
 							if (firstRow < 0) {
 								firstRow = 0;
 							}
@@ -80,23 +77,26 @@
 						});
 
 						$('#next').click(
-							function() {
-								firstRow += parseInt($('#showEntitiesSelector').val());
-								if (firstRow + parseInt($('#showEntitiesSelector').val()) <= $('#count').val()) {
-								showTable();
-								}
-						});
+								function() {
+									firstRow += parseInt($('#showEntitiesSelector').val());
+									if (firstRow + parseInt($('#showEntitiesSelector').val()) <= parseInt($('#count').val())) {
+										showTable();
+									}
+								});
 
 						var showTable = function() {
-							$('#curr').text( firstRow / $('#showEntitiesSelector').val()+1);
-							var entitiesOnTable = $('#showEntitiesSelector')
-									.val();
-							$.get("getAllUsersTable", {
+							$('#curr').text(firstRow / parseInt($('#showEntitiesSelector').val()) + 1);
+							var entitiesOnTable = parseInt($('#showEntitiesSelector').val());
+								$.get("getAllUsersTable", {
 								"firstRow" : firstRow,
-								"countRows" : entitiesOnTable,
-								orderBy : "id"
+								"countRows" :	entitiesOnTable,
+								"orderBy" : order
 							}).done(function(data) {
-								$('#allUsersTable').html(data);
+								$('#allUsersTable').html (data);
+								$('.selectedColumn').click(function(){
+									order = $(this).attr('id');
+									showTable();
+								});														
 							});
 						}
 						showTable();
@@ -118,9 +118,9 @@
 			<option>50</option>
 			<option>100</option>
 		</select> of ${Count} entities <br /> <br />
-		<button id='prev'><<< Prev.</button>
+		<button id='prev'> <<< Prev. </button>
 		<button id='curr'></button>
-		<button id='next'>Next >>></button>
+		<button id='next'> Next >>> </button>
 	</p>
 	<div id="allUsersTable"></div>
 	<br />
